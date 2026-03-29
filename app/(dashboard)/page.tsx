@@ -1,5 +1,6 @@
 import { CalorieHeader } from "@/components/dashboard/calorie-header";
 import { HealthGoalCard } from "@/components/dashboard/health-goal-card";
+import { EducationalLibrarySection } from "@/components/dashboard/educational-library-section";
 import { HealthDomainsSection } from "@/components/dashboard/health-domains-section";
 import { MriStatusCard } from "@/components/dashboard/mri-status-card";
 import { QuickActions } from "@/components/dashboard/quick-actions";
@@ -15,6 +16,7 @@ export default function DiaryPage() {
       <MriStatusCard />
       <HealthDomainsSection />
       <QuickActions />
+      <EducationalLibrarySection />
     </div>
   );
 }

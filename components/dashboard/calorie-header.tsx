@@ -47,10 +47,11 @@ export function CalorieHeader({
         <div className="relative z-10 flex min-h-0 flex-1 flex-col justify-center">
           <div className="grid grid-cols-3 items-center gap-10 px-1 py-6">
             <div className="flex min-w-0 flex-col items-center justify-center text-center pt-10">
-              <p className="font-sans text-2xl font-semibold tabular-nums leading-none">
-                80%
+              <p className="flex items-baseline justify-center gap-0.5 font-sans text-2xl font-semibold tabular-nums leading-none">
+                <span className="tabular-nums">80</span>
+                <span className="text-xl font-semibold leading-none">%</span>
               </p>
-              <p className="mt-1 max-w-[7rem] text-[10px] font-medium leading-snug text-white/85">
+              <p className="mt-1 max-w-[7rem] text-[12px] font-medium leading-tight text-white/85">
                 Screening Status
               </p>
             </div>
@@ -99,7 +100,7 @@ export function CalorieHeader({
                   <p className="text-6xl font-bold leading-none tabular-nums text-[#200201]">
                     {healthScore}
                   </p>
-                  <p className="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-[#200201]">
+                  <p className="text-base font-bold text-[#200201]">
                     Optimal
                   </p>
                 </div>
@@ -107,11 +108,12 @@ export function CalorieHeader({
             </div>
 
             <div className="flex min-w-0 flex-col items-center justify-center text-center pt-10">
-              <p className="font-sans text-2xl font-semibold tabular-nums leading-none">
-                {goalProgressPercent}%
+              <p className="flex items-baseline justify-center gap-0.5 font-sans text-2xl font-semibold tabular-nums leading-none">
+                <span className="tabular-nums">{goalProgressPercent}</span>
+                <span className="text-xl font-semibold leading-none">%</span>
               </p>
-              <p className="mt-1 max-w-[7rem] text-[10px] font-medium leading-snug text-white/85">
-                Goal Progress
+              <p className="mt-1 max-w-[7rem] text-[12px] leading-tight font-medium leading-snug text-white/85">
+                Goal <br /> Progress
               </p>
             </div>
           </div>

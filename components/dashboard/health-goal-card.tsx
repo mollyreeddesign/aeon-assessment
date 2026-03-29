@@ -5,10 +5,11 @@ import { useEffect, useRef, useState } from "react";
 import type { ComponentType, SVGProps } from "react";
 
 import {
-  improveMetabolismDailyGoalsHeading,
-  improveMetabolismDailyTasks,
-  improveMetabolismHealthGoalLabel,
-} from "@/components/dashboard/health-goals-data";
+  HEALTH_GOAL_CHECKLISTS,
+  type HealthGoalChecklistId,
+} from "@/components/dashboard/health-goal-checklists";
+import { improveMetabolismHealthGoalLabel } from "@/components/dashboard/health-goals-data";
+import { useHealthGoalsProgress } from "@/components/dashboard/health-goals-progress-context";
 import { useMetabolismPinned } from "@/components/dashboard/metabolism/metabolism-pinned-context";
 import { BrainIcon } from "@/components/icons/brain-icon";
 
@@ -36,34 +37,6 @@ function DropSimpleIcon({
   );
 }
 
-type ExpandableGoalId = "blood-pressure" | "brain-health" | "metabolism";
-
-const GOAL_CHECKLISTS: Record<
-  ExpandableGoalId,
-  { heading: string; items: string[] }
-> = {
-  "blood-pressure": {
-    heading: "Lower Blood Pressure Daily Goals",
-    items: [
-      "Stay under ~2,300 mg sodium",
-      "Aim for 30+ minutes of moderate activity",
-      "Track daily blood pressure readings after meals",
-    ],
-  },
-  "brain-health": {
-    heading: "Improve Brain Health Daily Goals",
-    items: [
-      "Sleep 7–8 hours",
-      "Eat omega-3 rich food",
-      "Learn or practice something new (language, music, skills)",
-    ],
-  },
-  metabolism: {
-    heading: improveMetabolismDailyGoalsHeading,
-    items: [...improveMetabolismDailyTasks],
-  },
-};
-
 type GoalIcon = ComponentType<{
   className?: string;
   strokeWidth?: number;
@@ -72,7 +45,7 @@ type GoalIcon = ComponentType<{
 const CORE_GOALS: {
   title: string;
   kind: "goal";
-  goalId: Exclude<ExpandableGoalId, "metabolism">;
+  goalId: Exclude<HealthGoalChecklistId, "metabolism">;
   Icon: GoalIcon;
 }[] = [
   {
@@ -94,7 +67,8 @@ const checkboxClass =
 
 export function HealthGoalCard() {
   const { showPinnedGoal } = useMetabolismPinned();
-  const [expanded, setExpanded] = useState<ExpandableGoalId | null>(null);
+  const { isChecked, setChecked } = useHealthGoalsProgress();
+  const [expanded, setExpanded] = useState<HealthGoalChecklistId | null>(null);
   const didAutoExpandMetabolism = useRef(false);
 
   const thirdSlot:
@@ -117,7 +91,7 @@ export function HealthGoalCard() {
     return () => cancelAnimationFrame(id);
   }, [showPinnedGoal]);
 
-  function toggleGoal(id: ExpandableGoalId) {
+  function toggleGoal(id: HealthGoalChecklistId) {
     setExpanded((current) => (current === id ? null : id));
   }
 
@@ -196,13 +170,20 @@ export function HealthGoalCard() {
           {expanded ? (
             <div className="border-t border-stone-200/80 px-2 pt-4">
               <h3 className="text-left font-serif text-base font-semibold text-zinc-900">
-                {GOAL_CHECKLISTS[expanded].heading}
+                {HEALTH_GOAL_CHECKLISTS[expanded].heading}
               </h3>
               <ul className="mt-3 flex flex-col gap-3">
-                {GOAL_CHECKLISTS[expanded].items.map((task) => (
+                {HEALTH_GOAL_CHECKLISTS[expanded].items.map((task, taskIndex) => (
                   <li key={task}>
                     <label className="flex cursor-pointer items-start gap-3 text-left">
-                      <input type="checkbox" className={checkboxClass} />
+                      <input
+                        type="checkbox"
+                        checked={isChecked(expanded, taskIndex)}
+                        onChange={(event) =>
+                          setChecked(expanded, taskIndex, event.target.checked)
+                        }
+                        className={checkboxClass}
+                      />
                       <span className="text-sm leading-snug text-zinc-800">
                         {task}
                       </span>

@@ -4,6 +4,8 @@ import { ChevronLeft } from "lucide-react";
 type SubpageHeaderProps = {
   title: string;
   subtitle?: string;
+  /** Overrides default `text-sm` subtitle sizing/weight (e.g. `text-[18px] font-medium text-zinc-800`). */
+  subtitleClassName?: string;
   /** Appended to the header root (e.g. override padding when using `DashboardTopBar`). */
   className?: string;
   /**
@@ -20,6 +22,7 @@ type SubpageHeaderProps = {
 export function SubpageHeader({
   title,
   subtitle,
+  subtitleClassName,
   className,
   solidSurfaceClassName,
   backHref,
@@ -87,8 +90,9 @@ export function SubpageHeader({
         </h1>
         {subtitle ? (
           <p
-            className={`mt-2 max-w-sm text-sm leading-relaxed ${
-              isSolid ? "text-zinc-700" : "text-white/90"
+            className={`mt-2 max-w-sm leading-relaxed ${
+              subtitleClassName ??
+              `text-sm ${isSolid ? "text-zinc-700" : "text-white/90"}`
             }`}
           >
             {subtitle}

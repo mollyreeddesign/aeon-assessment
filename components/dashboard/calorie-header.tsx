@@ -2,23 +2,21 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { useHealthGoalsProgress } from "@/components/dashboard/health-goals-progress-context";
 import { AnimatedHealthProgressRing } from "@/components/dashboard/health-progress-ring";
 import { DashboardTopBar } from "@/components/dashboard/dashboard-top-bar";
 
 type CalorieHeaderProps = {
-  eaten: number;
-  burned: number;
   healthScore: number;
   /** Ring fill 0–100; defaults to `healthScore` */
   ringFillPercent?: number;
 };
 
 export function CalorieHeader({
-  eaten,
-  burned,
   healthScore,
   ringFillPercent,
 }: CalorieHeaderProps) {
+  const { goalProgressPercent } = useHealthGoalsProgress();
   const [showCalculationModal, setShowCalculationModal] = useState(false);
   const ringPct = Math.min(
     100,
@@ -50,10 +48,10 @@ export function CalorieHeader({
           <div className="grid grid-cols-3 items-center gap-10 px-1 py-6">
             <div className="flex min-w-0 flex-col items-center justify-center text-center pt-10">
               <p className="font-sans text-2xl font-semibold tabular-nums leading-none">
-                {eaten.toLocaleString()}
+                80%
               </p>
-              <p className="mt-1 max-w-[5.5rem] text-[10px] font-medium uppercase tracking-wider text-white/85">
-                Health Age
+              <p className="mt-1 max-w-[7rem] text-[10px] font-medium leading-snug text-white/85">
+                Screening Status
               </p>
             </div>
 
@@ -110,10 +108,10 @@ export function CalorieHeader({
 
             <div className="flex min-w-0 flex-col items-center justify-center text-center pt-10">
               <p className="font-sans text-2xl font-semibold tabular-nums leading-none">
-                {burned}
+                {goalProgressPercent}%
               </p>
-              <p className="mt-1 max-w-[5.5rem] text-[10px] font-medium uppercase tracking-wider text-white/85">
-                Burned
+              <p className="mt-1 max-w-[7rem] text-[10px] font-medium leading-snug text-white/85">
+                Goal Progress
               </p>
             </div>
           </div>
@@ -153,6 +151,12 @@ export function CalorieHeader({
               markers into one weighted result. Recent improvements carry more
               weight than older data, and consistent healthy biomarker trends help raise
               the score over time.
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-zinc-700">
+              <span className="font-semibold text-zinc-800">Goal Progress</span> is
+              the percentage of daily goal checkboxes you have completed in Health
+              Goals. When you pin Improve Metabolism, those tasks count toward the
+              total as well.
             </p>
             <button
               type="button"

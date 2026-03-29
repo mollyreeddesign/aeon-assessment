@@ -8,8 +8,6 @@ export default function DiaryPage() {
   return (
     <div className="pb-28">
       <CalorieHeader
-        eaten={45}
-        burned={651}
         healthScore={83}
         ringFillPercent={84}
       />

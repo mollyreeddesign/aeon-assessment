@@ -71,8 +71,8 @@ type NavIcon = ComponentType<{
 const NAV_ITEMS: { href: string; label: string; Icon: NavIcon }[] = [
   { href: "/", label: "Home", Icon: SquaresFourIcon },
   { href: "/domains", label: "Domains", Icon: BrainIcon },
-  { href: "/diets", label: "Goals", Icon: TrendingUp },
-  { href: "/recipes", label: "Book", Icon: CalendarBlankIcon },
+  { href: "/goals", label: "Goals", Icon: TrendingUp },
+  { href: "/book", label: "Book", Icon: CalendarBlankIcon },
 ];
 
 function isActive(pathname: string, href: string) {

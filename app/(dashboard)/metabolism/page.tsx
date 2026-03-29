@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Flame, Stethoscope } from "lucide-react";
+import Link from "next/link";
+import { ChevronRight, Flame, ShieldCheck, Stethoscope } from "lucide-react";
 
 import { DashboardTopBar } from "@/components/dashboard/dashboard-top-bar";
 import { ScreeningStatusLabel } from "@/components/dashboard/screening-status-label";
@@ -46,9 +47,22 @@ export default function MetabolismPage() {
             walk after your largest meal, limit refined carbs at dinner, and
             recheck these labs in 8-12 weeks.
           </p>
-          <p className="mt-3 text-xs font-medium text-zinc-500">
-            Dr. Maya Chen · Mar 29, 2026
-          </p>
+          <div className="mt-3 flex items-center justify-between gap-2">
+            <p className="min-w-0 text-xs font-medium text-zinc-500">
+              Dr. Maya Chen · Mar 29, 2026
+            </p>
+            <div
+              className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg border border-sky-200/90 bg-sky-100/90 px-2 py-1.5 text-[12px] font-semibold leading-none text-sky-950 shadow-sm sm:px-2.5 sm:py-2 sm:text-[11px] sm:leading-snug"
+              role="status"
+            >
+              <ShieldCheck
+                className="h-3.5 w-3.5 shrink-0 text-sky-600 sm:h-4 sm:w-4"
+                strokeWidth={2}
+                aria-hidden
+              />
+              <span>Secure &amp; Private</span>
+            </div>
+          </div>
         </section>
         <section className="rounded-2xl border border-stone-200/80 bg-[#FDF9EB] px-4 py-4 shadow-[0_1px_4px_rgba(0,0,0,0.022)]">
           <div className="flex items-start justify-between gap-3">
@@ -87,6 +101,21 @@ export default function MetabolismPage() {
           <p className="mt-4 text-sm font-semibold text-zinc-600">
             Checkup Due: 2 months
           </p>
+        </section>
+        <section aria-label="Open the metabolic health guide">
+          <Link
+            href="/metabolism/improve-health"
+            className="group flex w-full items-center justify-between gap-3 rounded-2xl border border-stone-400/35 bg-[rgb(253,168,123)] px-4 py-4 text-left shadow-[0_2px_8px_rgba(0,0,0,0.08)] transition hover:brightness-[0.98] active:brightness-[0.94] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-800"
+          >
+            <span className="font-serif text-base font-semibold leading-snug text-zinc-900">
+              Read the metabolic health guide
+            </span>
+            <ChevronRight
+              className="h-6 w-6 shrink-0 text-zinc-900 transition group-hover:translate-x-0.5"
+              strokeWidth={2.25}
+              aria-hidden
+            />
+          </Link>
         </section>
         <ResultsTimeline />
         <BiomarkerSections />

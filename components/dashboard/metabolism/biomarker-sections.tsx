@@ -1,6 +1,28 @@
+import Image from "next/image";
 import { ArrowDown, ArrowUp, ChevronDown, Minus } from "lucide-react";
 
 import { SessionPicker } from "@/components/dashboard/metabolism/session-picker";
+
+const MRI_IMAGING_PLACEHOLDERS = [
+  {
+    src: "/images/Brain.png",
+    width: 1526,
+    height: 792,
+    alt: "Brain imaging reference from this MRI",
+  },
+  {
+    src: "/images/Lung.png",
+    width: 1110,
+    height: 606,
+    alt: "Lung imaging reference from this MRI",
+  },
+  {
+    src: "/images/report-open-hero-1.png",
+    width: 1300,
+    height: 949,
+    alt: "Whole-body imaging reference from this MRI",
+  },
+] as const;
 
 type Level = "high" | "low" | "optimal";
 
@@ -211,7 +233,7 @@ function LevelIndicator({ level, favorable }: { level: Level; favorable: boolean
   if (level === "optimal") {
     return (
       <span
-        className={`inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-zinc-100 ${favorable ? good : bad}`}
+        className={`inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#514c2410] ${favorable ? good : bad}`}
         title="In range"
         aria-label={favorable ? "In range, favorable" : "In range, review context"}
       >
@@ -233,7 +255,7 @@ function LevelIndicator({ level, favorable }: { level: Level; favorable: boolean
 
   return (
     <span
-      className={`inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-zinc-100 ${colorClass}`}
+      className={`inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#514c2410] ${colorClass}`}
       title={label}
       aria-label={label}
     >
@@ -304,6 +326,32 @@ export function BiomarkerSections() {
             </ul>
           </div>
         ))}
+      </div>
+
+      <div className="mt-8 border-t border-zinc-200/80 pt-6">
+        <h4 className="font-serif text-lg font-semibold text-zinc-900">
+          Imaging from this MRI
+        </h4>
+        <p className="mt-2 text-sm text-zinc-500">
+          Representative views for context alongside your biomarker results.
+        </p>
+        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
+          {MRI_IMAGING_PLACEHOLDERS.map((img) => (
+            <div
+              key={img.src}
+              className="overflow-hidden rounded-xl bg-[#ece8e2]"
+            >
+              <Image
+                src={img.src}
+                alt={img.alt}
+                width={img.width}
+                height={img.height}
+                className="h-auto w-full object-contain"
+                sizes="(max-width: 640px) 100vw, 33vw"
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

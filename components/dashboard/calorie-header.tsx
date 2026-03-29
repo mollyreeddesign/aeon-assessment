@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import { AnimatedHealthProgressRing } from "@/components/dashboard/health-progress-ring";
 import { DashboardTopBar } from "@/components/dashboard/dashboard-top-bar";
 
@@ -16,12 +19,14 @@ export function CalorieHeader({
   healthScore,
   ringFillPercent,
 }: CalorieHeaderProps) {
+  const [showCalculationModal, setShowCalculationModal] = useState(false);
   const ringPct = Math.min(
     100,
     Math.max(0, ringFillPercent ?? healthScore),
   );
   return (
-    <header className="relative overflow-hidden text-white">
+    <>
+      <header className="relative overflow-hidden text-white">
       <DashboardTopBar />
       <div
         className="relative flex min-h-[50dvh] flex-col overflow-hidden px-4 pb-24 pt-[calc(env(safe-area-inset-top,0px)+4rem)] text-white"
@@ -113,7 +118,52 @@ export function CalorieHeader({
             </div>
           </div>
         </div>
+        <div className="relative z-10 -mt-3 mb-1 flex justify-center">
+          <button
+            type="button"
+            onClick={() => setShowCalculationModal(true)}
+            className="text-xs font-medium text-white/90 underline decoration-white/70 underline-offset-2 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            How is this calculated?
+          </button>
+        </div>
       </div>
-    </header>
+      </header>
+
+      {showCalculationModal ? (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/45 px-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="health-score-modal-title"
+          onClick={() => setShowCalculationModal(false)}
+        >
+          <div
+            className="w-full max-w-sm rounded-2xl border border-stone-200/80 bg-[#FDF9EB] p-5 text-[#200201] shadow-[0_12px_36px_rgba(0,0,0,0.22)]"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <h3
+              id="health-score-modal-title"
+              className="font-serif text-lg font-semibold"
+            >
+              How your Health Score is calculated
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-zinc-700">
+              Your score combines biomarker trends and MRI
+              markers into one weighted result. Recent improvements carry more
+              weight than older data, and consistent healthy biomarker trends help raise
+              the score over time.
+            </p>
+            <button
+              type="button"
+              onClick={() => setShowCalculationModal(false)}
+              className="mt-5 inline-flex w-full items-center justify-center rounded-full bg-[#514c2410] px-4 py-2.5 text-sm font-semibold text-[#200201] transition hover:bg-[#514c2420] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      ) : null}
+    </>
   );
 }

@@ -7,15 +7,17 @@ import { useRouter } from "next/navigation";
 import { DashboardTopBar } from "@/components/dashboard/dashboard-top-bar";
 import {
   improveMetabolismDailyTasks,
-  improveMetabolismGoalTitle,
+  improveMetabolismHealthGoalLabel,
 } from "@/components/dashboard/health-goals-data";
 import { SubpageHeader } from "@/components/dashboard/subpage-header";
+import { useMetabolismPinned } from "@/components/dashboard/metabolism/metabolism-pinned-context";
 
 const headerSurfaceClass = "bg-[#fde8d4]";
 
 export default function EditMetabolismGoalPage() {
   const router = useRouter();
-  const [goalTitle, setGoalTitle] = useState(improveMetabolismGoalTitle);
+  const { setShowPinnedGoal } = useMetabolismPinned();
+  const [goalTitle, setGoalTitle] = useState(improveMetabolismHealthGoalLabel);
   const [tasks, setTasks] = useState<{ text: string; done: boolean }[]>(() =>
     improveMetabolismDailyTasks.map((task) => ({ text: task, done: false })),
   );
@@ -98,7 +100,10 @@ export default function EditMetabolismGoalPage() {
           </button>
           <button
             type="button"
-            onClick={() => router.push("/")}
+            onClick={() => {
+              setShowPinnedGoal(true);
+              router.push("/");
+            }}
             className="mt-5 flex w-full items-center justify-center rounded-full bg-[#514c2410] px-5 py-3 text-sm font-semibold text-[#200201] transition hover:bg-[#514c2420] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500"
           >
             Save and Pin

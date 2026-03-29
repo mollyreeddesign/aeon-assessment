@@ -1,9 +1,15 @@
 "use client";
 
-import { Plus } from "lucide-react";
-import { useState } from "react";
-import type { SVGProps } from "react";
+import { Flame, Plus } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import type { ComponentType, SVGProps } from "react";
 
+import {
+  improveMetabolismDailyGoalsHeading,
+  improveMetabolismDailyTasks,
+  improveMetabolismHealthGoalLabel,
+} from "@/components/dashboard/health-goals-data";
+import { useMetabolismPinned } from "@/components/dashboard/metabolism/metabolism-pinned-context";
 import { BrainIcon } from "@/components/icons/brain-icon";
 
 function DropSimpleIcon({
@@ -30,35 +36,44 @@ function DropSimpleIcon({
   );
 }
 
-type ExpandableGoalId = "blood-pressure" | "brain-health";
+type ExpandableGoalId = "blood-pressure" | "brain-health" | "metabolism";
 
 const GOAL_CHECKLISTS: Record<
   ExpandableGoalId,
   { heading: string; items: string[] }
 > = {
   "blood-pressure": {
-    heading: "Lower Blood Pressure",
+    heading: "Lower Blood Pressure Daily Goals",
     items: [
-      "Stay under ~2,300 mg sodium on most days",
-      "Aim for 150+ minutes of moderate activity weekly",
-      "Take home blood pressure readings on a consistent schedule",
+      "Stay under ~2,300 mg sodium",
+      "Aim for 30+ minutes of moderate activity",
+      "Track daily blood pressure readings after meals",
     ],
   },
   "brain-health": {
-    heading: "Improve Brain Health",
+    heading: "Improve Brain Health Daily Goals",
     items: [
-      "Sleep 7–8 hours on a regular schedule",
-      "Eat omega-3 rich foods a few times per week",
+      "Sleep 7–8 hours",
+      "Eat omega-3 rich food",
       "Learn or practice something new (language, music, skills)",
     ],
   },
+  metabolism: {
+    heading: improveMetabolismDailyGoalsHeading,
+    items: [...improveMetabolismDailyTasks],
+  },
 };
 
-const goals: {
+type GoalIcon = ComponentType<{
+  className?: string;
+  strokeWidth?: number;
+}>;
+
+const CORE_GOALS: {
   title: string;
-  kind: "goal" | "add";
-  goalId?: ExpandableGoalId;
-  Icon?: typeof BrainIcon | typeof DropSimpleIcon;
+  kind: "goal";
+  goalId: Exclude<ExpandableGoalId, "metabolism">;
+  Icon: GoalIcon;
 }[] = [
   {
     title: "Lower Blood Pressure",
@@ -72,14 +87,35 @@ const goals: {
     goalId: "brain-health",
     Icon: BrainIcon,
   },
-  { title: "Add a Goal", kind: "add" },
 ];
 
 const checkboxClass =
   "mt-0.5 size-4 shrink-0 cursor-pointer rounded-sm border border-zinc-400 bg-[#FDF9EB] accent-zinc-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400";
 
 export function HealthGoalCard() {
+  const { showPinnedGoal } = useMetabolismPinned();
   const [expanded, setExpanded] = useState<ExpandableGoalId | null>(null);
+  const didAutoExpandMetabolism = useRef(false);
+
+  const thirdSlot:
+    | { title: string; kind: "goal"; goalId: "metabolism"; Icon: GoalIcon }
+    | { title: string; kind: "add" } = showPinnedGoal
+    ? {
+        title: improveMetabolismHealthGoalLabel,
+        kind: "goal",
+        goalId: "metabolism",
+        Icon: Flame,
+      }
+    : { title: "Add a Goal", kind: "add" };
+
+  const goals = [...CORE_GOALS, thirdSlot];
+
+  useEffect(() => {
+    if (!showPinnedGoal || didAutoExpandMetabolism.current) return;
+    didAutoExpandMetabolism.current = true;
+    const id = requestAnimationFrame(() => setExpanded("metabolism"));
+    return () => cancelAnimationFrame(id);
+  }, [showPinnedGoal]);
 
   function toggleGoal(id: ExpandableGoalId) {
     setExpanded((current) => (current === id ? null : id));
@@ -93,61 +129,61 @@ export function HealthGoalCard() {
         Health Goals
       </h2>
       <div className="grid grid-cols-3 gap-2">
-        {goals.map(({ title, kind, goalId, Icon }, index) =>
-          kind === "add" ? (
+        {goals.map((item, index) => {
+          if (item.kind === "add") {
+            return (
+              <button
+                key={`${item.title}-${index}`}
+                type="button"
+                aria-label="Add a goal"
+                className="flex flex-col items-center gap-2 text-center transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"
+              >
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-dashed border-zinc-200/90 bg-zinc-50 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+                  <Plus
+                    className="h-7 w-7 text-zinc-400"
+                    strokeWidth={1.5}
+                    aria-hidden
+                  />
+                </div>
+                <p className="text-[13px] font-semibold leading-snug text-zinc-600 sm:text-base">
+                  {item.title}
+                </p>
+              </button>
+            );
+          }
+          const { title, goalId, Icon } = item;
+          return (
             <button
               key={`${title}-${index}`}
               type="button"
-              aria-label="Add a goal"
-              className="flex flex-col items-center gap-2 text-center transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"
-            >
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-dashed border-zinc-200/90 bg-zinc-50 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
-                <Plus
-                  className="h-7 w-7 text-zinc-400"
-                  strokeWidth={1.5}
-                  aria-hidden
-                />
-              </div>
-              <p className="text-[13px] font-semibold leading-snug text-zinc-600 sm:text-base">
-                {title}
-              </p>
-            </button>
-          ) : (
-            <button
-              key={`${title}-${index}`}
-              type="button"
-              onClick={() => goalId && toggleGoal(goalId)}
-              aria-expanded={goalId ? expanded === goalId : false}
-              aria-controls={
-                goalId ? `goal-checklist-${goalId}` : undefined
-              }
+              onClick={() => toggleGoal(goalId)}
+              aria-expanded={expanded === goalId}
+              aria-controls={`goal-checklist-${goalId}`}
               className="flex flex-col items-center gap-2 text-center transition hover:opacity-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"
             >
               <div
                 className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl shadow-[0_1px_3px_rgba(0,0,0,0.04)] transition-colors ${
-                  goalId && expanded === goalId
+                  expanded === goalId
                     ? "border border-[#200201] bg-[#200201]"
                     : "border border-black/10 bg-[#514c2410]"
                 } duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]`}
               >
-                {Icon ? (
-                  <Icon
-                    className={`h-7 w-7 transition-colors ${
-                      goalId && expanded === goalId
-                        ? "text-[#FDF9EB]"
-                        : "text-[#200201]"
-                    } duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]`}
-                    strokeWidth={1.5}
-                    aria-hidden
-                  />
-                ) : null}
+                <Icon
+                  className={`h-7 w-7 transition-colors ${
+                    expanded === goalId
+                      ? "text-[#FDF9EB]"
+                      : "text-[#200201]"
+                  } duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]`}
+                  strokeWidth={1.5}
+                  aria-hidden
+                />
               </div>
               <p className="text-[13px] font-semibold leading-snug text-zinc-900 sm:text-base">
                 {title}
               </p>
             </button>
-          ),
-        )}
+          );
+        })}
       </div>
 
       <div

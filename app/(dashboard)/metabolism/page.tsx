@@ -4,7 +4,7 @@ import { Flame, Stethoscope } from "lucide-react";
 import { DashboardTopBar } from "@/components/dashboard/dashboard-top-bar";
 import { ScreeningStatusLabel } from "@/components/dashboard/screening-status-label";
 import { BiomarkerSections } from "@/components/dashboard/metabolism/biomarker-sections";
-import { ImproveMetabolismSection } from "@/components/dashboard/metabolism/improve-metabolism-section";
+import { MetabolismImproveSectionGate } from "@/components/dashboard/metabolism/metabolism-improve-section-gate";
 import { ResultsTimeline } from "@/components/dashboard/metabolism/results-timeline";
 import { SubpageHeader } from "@/components/dashboard/subpage-header";
 
@@ -90,7 +90,7 @@ export default function MetabolismPage() {
         </section>
         <ResultsTimeline />
         <BiomarkerSections />
-        <ImproveMetabolismSection />
+        <MetabolismImproveSectionGate />
       </div>
     </div>
   );

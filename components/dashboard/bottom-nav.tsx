@@ -136,7 +136,7 @@ export function BottomNav() {
       aria-label="Main"
     >
       <div className="pointer-events-auto relative mx-auto w-full max-w-md px-3">
-        <div className="rounded-t-3xl bg-[#FDF9EB] px-2 pb-[max(0.50rem,env(safe-area-inset-bottom))] pt-1 shadow-[0_-3px_12px_rgba(0,0,0,0.035)]">
+        <div className="rounded-t-3xl bg-[#FEFCF6] px-2 pb-[max(0.50rem,env(safe-area-inset-bottom))] pt-1 shadow-[0_-3px_12px_rgba(0,0,0,0.035)]">
           <div
             ref={containerRef}
             className="relative flex h-16 items-center justify-around"

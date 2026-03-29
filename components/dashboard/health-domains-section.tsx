@@ -11,7 +11,7 @@ export function HealthDomainsSection() {
         Understand your health across key areas like Heart, Metabolism, and more.
       </p>
       <Link
-        href="#"
+        href="/domains"
         className="mt-5 inline-flex items-center gap-1.5 rounded-full bg-[#200201] px-[19px] py-[14px] font-medium text-md text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
       >
         View Domains

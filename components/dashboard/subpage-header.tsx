@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
+
 type SubpageHeaderProps = {
   title: string;
   subtitle?: string;
@@ -8,6 +11,10 @@ type SubpageHeaderProps = {
    * Title and subtitle switch to dark text for contrast.
    */
   solidSurfaceClassName?: string;
+  /** Renders a back control above the title (e.g. `/domains`). */
+  backHref?: string;
+  /** Label next to the chevron (underlined). Defaults to Domains. */
+  backLabel?: string;
 };
 
 export function SubpageHeader({
@@ -15,6 +22,8 @@ export function SubpageHeader({
   subtitle,
   className,
   solidSurfaceClassName,
+  backHref,
+  backLabel = "Domains",
 }: SubpageHeaderProps) {
   const isSolid = Boolean(solidSurfaceClassName);
 
@@ -44,6 +53,31 @@ export function SubpageHeader({
         </>
       )}
       <div className="relative">
+        {backHref ? (
+          <Link
+            href={backHref}
+            className={`mb-3 inline-flex items-center gap-0.5 text-xs font-medium transition hover:opacity-90 focus-visible:rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
+              isSolid
+                ? "text-zinc-900 focus-visible:outline-zinc-500"
+                : "text-white focus-visible:outline-white/80"
+            }`}
+          >
+            <ChevronLeft
+              className="h-4 w-4 shrink-0 -translate-y-px"
+              strokeWidth={2}
+              aria-hidden
+            />
+            <span
+              className={
+                isSolid
+                  ? "underline decoration-zinc-900/60 underline-offset-2"
+                  : "underline decoration-white/70 underline-offset-2"
+              }
+            >
+              {backLabel}
+            </span>
+          </Link>
+        ) : null}
         <h1
           className={`font-serif text-3xl font-semibold tracking-tight ${
             isSolid ? "text-zinc-950" : ""

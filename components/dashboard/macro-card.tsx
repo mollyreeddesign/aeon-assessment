@@ -5,12 +5,10 @@ import { ChevronDown } from "lucide-react";
 import type { SVGProps } from "react";
 
 import { BrainIcon } from "@/components/icons/brain-icon";
-
-const metabolismDailyTasks = [
-  "30 minute walk",
-  "Take Supplements",
-  "Meal Prep for the week",
-] as const;
+import {
+  improveMetabolismDailyTasks,
+  improveMetabolismGoalTitle,
+} from "@/components/dashboard/health-goals-data";
 
 function MetabolicHealthIcon({
   className,
@@ -109,10 +107,10 @@ export function MacroCard() {
         className="mt-4 border-t border-zinc-100 pt-4 px-6"
       >
         <h3 className="text-left text-sm font-semibold text-zinc-900">
-          Improve Metabolism Daily Tasks
+          {improveMetabolismGoalTitle}
         </h3>
         <ul className="mt-3 flex flex-col gap-3">
-          {metabolismDailyTasks.map((task) => (
+          {improveMetabolismDailyTasks.map((task) => (
             <li key={task}>
               <label className="flex cursor-pointer items-start gap-3 text-left">
                 <input

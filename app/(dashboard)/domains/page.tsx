@@ -23,7 +23,7 @@ export default function DomainsPage() {
         subtitle="Explore your health areas that matter to you."
       />
       <div className="flex flex-col gap-4 px-4 pt-5">
-      <DomainAreaCard
+        <DomainAreaCard
           title="Metabolism"
           icon={
             <Flame className={iconClass} strokeWidth={1.75} aria-hidden />
@@ -33,6 +33,7 @@ export default function DomainsPage() {
           findingsStatus="attention-required"
           findingsBody="Some findings require further review. We recommend following up with a specialist for a more detailed assessment."
           checkupDue="2 months"
+          openHref="/metabolism"
         />
         <DomainAreaCard
           title="Cancer"

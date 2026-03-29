@@ -39,7 +39,7 @@ export function MriStatusCard() {
         <div className="mt-4 grid grid-cols-3 gap-2 sm:gap-3">
           <div className="flex min-h-0 min-w-0 flex-col rounded-2xl bg-[#f4c3c6] px-3 py-3 sm:px-4 sm:py-4">
             <p className="text-3xl font-bold tabular-nums leading-none text-[#200201] sm:text-4xl">
-              0
+              1
             </p>
             <p className="mt-2 text-left text-[11px] font-medium leading-snug text-[#200201] sm:text-xs">
               Attention required

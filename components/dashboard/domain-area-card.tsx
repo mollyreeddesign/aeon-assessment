@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { ScreeningStatusLabel } from "@/components/dashboard/screening-status-label";
@@ -19,6 +20,8 @@ type DomainAreaCardProps = {
   findingsStatus?: FindingsStatus;
   /** `"due"` → gray “Checkup Due: …”; `"overdue"` → red “Checkup: Overdue”. */
   checkupLine?: CheckupLine;
+  /** When set, “Open” navigates here instead of a no-op button. */
+  openHref?: string;
 };
 
 export function DomainAreaCard({
@@ -30,7 +33,10 @@ export function DomainAreaCard({
   checkupDue = "6 months",
   findingsStatus = "good",
   checkupLine = "due",
+  openHref,
 }: DomainAreaCardProps) {
+  const openClassName =
+    "inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full bg-zinc-200 px-[19px] py-[14px] font-medium text-md text-[#200201] transition hover:bg-zinc-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500";
   return (
     <div className="rounded-2xl bg-white p-4 shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
       <div className="flex items-start justify-between gap-3">
@@ -79,17 +85,25 @@ export function DomainAreaCard({
         <p className="mt-2 text-sm leading-relaxed text-zinc-700">{findingsBody}</p>
       </div>
       <div className="mt-5 flex flex-row flex-wrap items-end justify-between gap-x-4 gap-y-2">
-        <button
-          type="button"
-          className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full bg-zinc-200 px-[19px] py-[14px] font-medium text-md text-[#200201] transition hover:bg-zinc-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500"
-        >
-          Open
-          <ChevronRight
-            className="h-4 w-4 shrink-0 text-[#200201]"
-            strokeWidth={2.5}
-            aria-hidden
-          />
-        </button>
+        {openHref ? (
+          <Link href={openHref} className={openClassName}>
+            Open
+            <ChevronRight
+              className="h-4 w-4 shrink-0 text-[#200201]"
+              strokeWidth={2.5}
+              aria-hidden
+            />
+          </Link>
+        ) : (
+          <button type="button" className={openClassName}>
+            Open
+            <ChevronRight
+              className="h-4 w-4 shrink-0 text-[#200201]"
+              strokeWidth={2.5}
+              aria-hidden
+            />
+          </button>
+        )}
         <p
           className={`shrink-0 whitespace-nowrap text-sm font-semibold ${
             checkupLine === "overdue" ? "text-red-600" : "text-zinc-600"

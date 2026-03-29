@@ -16,7 +16,7 @@ export default function AddPage() {
           </div>
           <button
             type="button"
-            className="flex shrink-0 items-center justify-center rounded-xl bg-zinc-900 px-4 text-white transition hover:bg-zinc-800"
+            className="flex shrink-0 items-center justify-center rounded-xl bg-zinc-200 px-4 text-[#200201] transition hover:bg-zinc-300"
             aria-label="Scan barcode"
           >
             <Camera className="h-5 w-5" strokeWidth={2} />

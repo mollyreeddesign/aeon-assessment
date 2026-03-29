@@ -65,11 +65,11 @@ export function MriStatusCard() {
 
         <button
           type="button"
-          className="mt-5 flex items-center justify-center gap-1.5 rounded-full bg-[#200201] text-white px-[19px] py-[14px] font-medium text-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
+          className="mt-5 flex items-center justify-center gap-1.5 rounded-full bg-zinc-200 px-[19px] py-[14px] font-medium text-md text-[#200201] transition hover:bg-zinc-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500"
         >
           Open Report
           <ChevronRight
-            className="h-4 w-4 shrink-0 text-white"
+            className="h-4 w-4 shrink-0 text-[#200201]"
             strokeWidth={2.5}
             aria-hidden
           />

@@ -12,11 +12,11 @@ export function HealthDomainsSection() {
       </p>
       <Link
         href="/domains"
-        className="mt-5 inline-flex items-center gap-1.5 rounded-full bg-[#200201] px-[19px] py-[14px] font-medium text-md text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
+        className="mt-5 inline-flex items-center gap-1.5 rounded-full bg-zinc-200 px-[19px] py-[14px] font-medium text-md text-[#200201] transition hover:bg-zinc-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500"
       >
         View Domains
         <ChevronRight
-          className="h-4 w-4 shrink-0 text-white"
+          className="h-4 w-4 shrink-0 text-[#200201]"
           strokeWidth={2.5}
           aria-hidden
         />

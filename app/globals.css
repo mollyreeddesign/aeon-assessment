@@ -144,7 +144,8 @@
 }
 
 :root {
-  --background: #f5f5f4;
+  /* rgb(253 250 238) */
+  --background: #fdfaee;
   --foreground: #18181b;
 }
 

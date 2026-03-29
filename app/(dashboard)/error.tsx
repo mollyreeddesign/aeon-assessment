@@ -20,7 +20,7 @@ export default function DashboardError({
       <button
         type="button"
         onClick={reset}
-        className="rounded-full bg-zinc-900 px-4 py-2 text-sm font-medium text-white"
+        className="rounded-full bg-zinc-200 px-4 py-2 text-sm font-medium text-[#200201] transition hover:bg-zinc-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500"
       >
         Try again
       </button>

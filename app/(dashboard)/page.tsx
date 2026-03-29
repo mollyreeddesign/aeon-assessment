@@ -2,6 +2,7 @@ import { CalorieHeader } from "@/components/dashboard/calorie-header";
 import { DayRatingCard } from "@/components/dashboard/day-rating-card";
 import { MacroCard } from "@/components/dashboard/macro-card";
 import { MriResultsAlert } from "@/components/dashboard/mri-results-alert";
+import { HealthDomainsSection } from "@/components/dashboard/health-domains-section";
 import { MriStatusCard } from "@/components/dashboard/mri-status-card";
 import { QuickActions } from "@/components/dashboard/quick-actions";
 
@@ -17,6 +18,7 @@ export default function DiaryPage() {
       <MacroCard />
       <MriResultsAlert />
       <MriStatusCard />
+      <HealthDomainsSection />
       <QuickActions />
       <DayRatingCard message="Eat more healthy carbs to boost your day rating!" />
 

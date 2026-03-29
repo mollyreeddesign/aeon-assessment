@@ -138,7 +138,7 @@ function ActionLeadingIcon({ item }: { item: ActionItem }) {
 export function QuickActions() {
   return (
     <section className="mx-4 mt-6">
-      <h2 className="text-xl font-bold tracking-tight text-zinc-950">
+      <h2 className="text-xl font-semibold text-zinc-950">
         Quick Actions
       </h2>
       <div className="mt-4 grid grid-cols-2 gap-3">

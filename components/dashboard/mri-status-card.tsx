@@ -30,10 +30,10 @@ export function MriStatusCard() {
 
       <div className="bg-zinc-100 px-5 pb-5 pt-3">
         <div className="flex items-center justify-between">
-          <h3 className="mt-1 text-xl font-semibold text-zinc-950">
+          <h2 className="text-xl font-semibold text-zinc-950">
             Plus MRI Results
-          </h3>
-          <p className="mt-1 text-base font-medium text-zinc-950">12/11/2025</p>
+          </h2>
+          <p className="text-base font-medium text-zinc-950">12/11/2025</p>
         </div>
 
         <div className="mt-4 grid grid-cols-3 gap-2 sm:gap-3">

@@ -1,4 +1,14 @@
+"use client";
+
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 import type { SVGProps } from "react";
+
+const metabolismDailyTasks = [
+  "30 minute walk",
+  "Take Supplements",
+  "Meal Prep for the week",
+] as const;
 
 function MetabolicHealthIcon({
   className,
@@ -86,9 +96,11 @@ const goals: {
 ];
 
 export function MacroCard() {
+  const [expanded, setExpanded] = useState(false);
+
   return (
     <div className="relative z-10 -mt-16 mx-4 rounded-3xl bg-white px-3 py-5 shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
-      <h2 className="mb-3 text-center text-lg font-semibold tracking-tight text-zinc-900">
+      <h2 className="mb-3 text-center text-xl font-semibold text-zinc-950">
         Health Goals
       </h2>
       <div className="grid grid-cols-3 gap-2">
@@ -111,6 +123,48 @@ export function MacroCard() {
             </p>
           </div>
         ))}
+      </div>
+
+      <div
+        id="health-goals-expanded"
+        hidden={!expanded}
+        className="mt-4 border-t border-zinc-100 pt-4 px-6"
+      >
+        <h3 className="text-left text-sm font-semibold text-zinc-900">
+          Improve Metabolism Daily Tasks
+        </h3>
+        <ul className="mt-3 flex flex-col gap-3">
+          {metabolismDailyTasks.map((task) => (
+            <li key={task}>
+              <label className="flex cursor-pointer items-start gap-3 text-left">
+                <input
+                  type="checkbox"
+                  className="mt-0.5 size-4 shrink-0 cursor-pointer rounded-sm border border-zinc-400 bg-white accent-zinc-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"
+                />
+                <span className="text-sm leading-snug text-zinc-800">
+                  {task}
+                </span>
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="mt-4 flex justify-center">
+        <button
+          type="button"
+          onClick={() => setExpanded((e) => !e)}
+          aria-expanded={expanded}
+          aria-controls="health-goals-expanded"
+          className="inline-flex items-center gap-0.5 text-xs font-medium text-zinc-600 underline decoration-zinc-500/70 underline-offset-[3px] transition hover:text-zinc-900 hover:decoration-zinc-700 focus-visible:rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"
+        >
+          {expanded ? "View Less" : "View More"}
+          <ChevronDown
+            className={`h-3.5 w-3.5 shrink-0 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
+            strokeWidth={2.25}
+            aria-hidden
+          />
+        </button>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { AnimatedHealthProgressRing } from "@/components/dashboard/health-progress-ring";
 import { DashboardTopBar } from "@/components/dashboard/dashboard-top-bar";
 
 type CalorieHeaderProps = {
@@ -8,64 +9,6 @@ type CalorieHeaderProps = {
   /** Ring fill 0–100; defaults to `healthScore` */
   ringFillPercent?: number;
 };
-
-function HealthProgressRing({
-  percent,
-  className,
-}: {
-  percent: number;
-  className?: string;
-}) {
-  const strokeW = 6;
-  const r = 47;
-  const c = 2 * Math.PI * r;
-  const p = Math.min(100, Math.max(0, percent));
-  const dash = (p / 100) * c;
-
-  return (
-    <svg
-      viewBox="0 0 100 100"
-      fill="none"
-      className={className}
-      aria-hidden={true}
-    >
-      <defs>
-        <linearGradient
-          id="diaryHealthRingGreen"
-          x1="18"
-          y1="14"
-          x2="92"
-          y2="88"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stopColor="#2BBD62" />
-          <stop offset="0.4" stopColor="#2BBD62" />
-          <stop offset="1" stopColor="#166534" />
-        </linearGradient>
-      </defs>
-      <circle
-        cx="50"
-        cy="50"
-        r={r}
-        fill="none"
-        stroke="#E8F5E9"
-        strokeOpacity={0.95}
-        strokeWidth={strokeW}
-      />
-      <circle
-        cx="50"
-        cy="50"
-        r={r}
-        fill="none"
-        stroke="url(#diaryHealthRingGreen)"
-        strokeWidth={strokeW}
-        strokeLinecap="round"
-        strokeDasharray={`${dash} ${c}`}
-        className="transition-[stroke-dasharray] duration-700 ease-out"
-      />
-    </svg>
-  );
-}
 
 export function CalorieHeader({
   eaten,
@@ -110,9 +53,9 @@ export function CalorieHeader({
             </div>
 
             <div className="flex min-w-0 flex-col items-center justify-center justify-self-center gap-4">
-              <p className="text-center text-lg font-semibold tracking-tight text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.45)]">
+              <h2 className="text-center text-xl font-semibold text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.45)]">
                 Health Score
-              </p>
+              </h2>
               <div className="relative mx-auto flex h-[10rem] w-[10rem] shrink-0 items-center justify-center">
                 <svg
                   width={261}
@@ -145,8 +88,8 @@ export function CalorieHeader({
                     </linearGradient>
                   </defs>
                 </svg>
-                <HealthProgressRing
-                  percent={ringPct}
+                <AnimatedHealthProgressRing
+                  targetPercent={ringPct}
                   className="pointer-events-none absolute left-1/2 top-1/2 z-[5] h-[10rem] w-[10rem] -translate-x-1/2 -translate-y-1/2 -rotate-90"
                 />
                 <div className="relative z-10 text-center">

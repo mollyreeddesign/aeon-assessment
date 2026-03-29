@@ -1,33 +1,29 @@
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 export function MriStatusCard() {
   return (
-    <article className="mx-4 mt-5 overflow-hidden rounded-3xl bg-white shadow-[0_8px_32px_rgba(0,0,0,0.1)]">
-      <div className="relative rounded-t-3xl bg-black px-4 pb-6 pt-4">
-        <div className="inline-flex items-center gap-2 rounded-full bg-zinc-200 px-3 py-1.5">
-          <span
-            className="h-2 w-2 shrink-0 rounded-full bg-emerald-500"
-            aria-hidden
+    <article className="mx-4 mt-3 overflow-hidden rounded-3xl bg-white shadow-[0_8px_32px_rgba(0,0,0,0.1)]">
+      <div className="relative overflow-hidden rounded-t-3xl bg-black">
+        <div className="relative aspect-video w-full">
+          <Image
+            src="/images/mri-card-visual.png"
+            alt="Sagittal MRI brain scan"
+            fill
+            sizes="(max-width: 448px) calc(100vw - 2rem), 400px"
+            className="z-0 object-cover object-[center_35%]"
+            priority={false}
           />
-          <span className="text-[10px] font-semibold uppercase tracking-wide text-zinc-700">
-            New result
-          </span>
-        </div>
-
-        <div className="relative mx-auto mt-4 flex justify-center pb-2">
-          <div
-            className="pointer-events-none absolute left-1/2 top-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/25 blur-xl"
-            aria-hidden
-          />
-          <div className="relative h-24 w-24 overflow-hidden rounded-full ring-2 ring-white/15">
-            <Image
-              src="/images/mri-card-visual.png"
-              alt="Sagittal MRI brain scan"
-              fill
-              sizes="96px"
-              className="object-cover object-center"
-            />
+          <div className="pointer-events-none absolute inset-0 z-10 p-4">
+            <div className="inline-flex items-center gap-2 rounded-full bg-zinc-200 px-3 py-1.5 shadow-sm">
+              <span
+                className="h-2 w-2 shrink-0 rounded-full bg-emerald-500"
+                aria-hidden
+              />
+              <span className="text-[13px] font-base tracking-wide text-zinc-700">
+                New Results
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -44,10 +40,14 @@ export function MriStatusCard() {
         </p>
         <button
           type="button"
-          className="mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-blue-600 py-3.5 text-sm font-bold text-white shadow-sm transition hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+          className="mt-5 flex items-center justify-center gap-1.5 rounded-full bg-[#FBA87F] px-[19px] py-[14px] font-medium text-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900"
         >
           Open Report
-          <ArrowRight className="h-4 w-4" strokeWidth={2.5} aria-hidden />
+          <ChevronRight
+            className="h-4 w-4 shrink-0 text-black"
+            strokeWidth={2.5}
+            aria-hidden
+          />
         </button>
       </div>
     </article>

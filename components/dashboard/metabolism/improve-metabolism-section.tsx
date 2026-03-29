@@ -18,7 +18,7 @@ const tips: { heading: string; body: string }[] = [
 
 export function ImproveMetabolismSection() {
   return (
-    <section className="rounded-2xl border border-stone-200/80 bg-white px-4 py-5 shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
+    <section className="rounded-2xl border border-stone-200/80 bg-[#FDF9EB] px-4 py-5 shadow-[0_1px_4px_rgba(0,0,0,0.022)]">
       <div className="flex gap-3">
         <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-amber-100 text-[#200201]">
           <Lightbulb className="h-5 w-5" strokeWidth={1.75} aria-hidden />
@@ -27,7 +27,7 @@ export function ImproveMetabolismSection() {
           <h3 className="font-serif text-lg font-semibold leading-snug text-zinc-900">
             How to improve Metabolic Health
           </h3>
-          <p className="mt-1 text-xs leading-relaxed text-zinc-500">
+          <p className="mt-1 text-sm leading-relaxed text-zinc-500">
             Small, steady habits add up. 
           </p>
         </div>
@@ -47,7 +47,7 @@ export function ImproveMetabolismSection() {
       
       <Link
         href="/metabolism/edit-goal"
-        className="mt-5 inline-flex items-center justify-center gap-1.5 rounded-full bg-zinc-200 px-[19px] py-[14px] text-md font-medium text-[#200201] transition hover:bg-zinc-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500"
+        className="mt-5 inline-flex items-center justify-center gap-1.5 rounded-full bg-[#514c2410] px-[19px] py-[14px] text-md font-medium text-[#200201] transition hover:bg-[#514c2420] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500"
       >
         <Pencil
           className="h-4 w-4 shrink-0 text-[#200201]"

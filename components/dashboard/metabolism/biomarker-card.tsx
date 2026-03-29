@@ -52,7 +52,7 @@ export function BiomarkerCard({
           />
           <div className="relative h-2 min-w-[4rem] max-w-[7rem] flex-1 rounded-full bg-emerald-100">
             <span
-              className="absolute top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-emerald-700 shadow-sm"
+              className="absolute top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-emerald-700 shadow-[0_1px_1px_rgba(0,0,0,0.15)]"
               style={{ left: `${pct}%` }}
               aria-hidden
             />
@@ -69,7 +69,7 @@ export function BiomarkerCard({
   return (
     <Link
       href={href}
-      className="block rounded-2xl border border-stone-200/90 bg-[#faf8f5] p-3 shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition hover:border-stone-300/90 hover:bg-[#f7f4ef] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"
+      className="block rounded-2xl border border-stone-200/90 bg-[#faf8f5] p-3 shadow-[0_1px_4px_rgba(0,0,0,0.022)] transition hover:border-stone-300/90 hover:bg-[#f7f4ef] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"
     >
       {inner}
     </Link>

@@ -50,7 +50,7 @@ export function SessionPicker({ labelId }: SessionPickerProps) {
         aria-controls={open ? listId : undefined}
         aria-labelledby={`${labelId} ${valueId}`}
         onClick={() => setOpen((o) => !o)}
-        className="flex min-h-[44px] w-full items-center justify-between gap-2 rounded-xl border border-zinc-300 bg-white py-2.5 pl-3.5 pr-3 text-left text-sm font-medium leading-snug text-zinc-900 shadow-sm outline-none transition hover:border-zinc-400 focus-visible:border-zinc-500 focus-visible:ring-2 focus-visible:ring-zinc-200 sm:text-[15px]"
+        className="flex min-h-[44px] w-full items-center justify-between gap-2 rounded-xl border border-zinc-300 bg-[#514c2410] py-2.5 pl-3.5 pr-3 text-left text-sm font-medium leading-snug text-zinc-900 shadow-[0_1px_2px_rgba(0,0,0,0.035)] outline-none transition hover:border-zinc-400 focus-visible:border-zinc-500 focus-visible:ring-2 focus-visible:ring-zinc-200 sm:text-[15px]"
       >
         <span id={valueId} className="min-w-0 flex-1 truncate">
           {value}
@@ -67,7 +67,7 @@ export function SessionPicker({ labelId }: SessionPickerProps) {
           id={listId}
           role="listbox"
           aria-labelledby={labelId}
-          className="absolute left-0 right-0 top-[calc(100%+4px)] z-[100] max-h-[min(16rem,50vh)] overflow-auto rounded-xl border border-zinc-200 bg-white py-1 shadow-[0_10px_40px_rgba(0,0,0,0.12)] ring-1 ring-black/5"
+          className="absolute left-0 right-0 top-[calc(100%+4px)] z-[100] max-h-[min(16rem,50vh)] overflow-auto rounded-xl border border-zinc-200 bg-[#FDF9EB] py-1 shadow-[0_2px_8px_rgba(0,0,0,0.04)] ring-1 ring-black/[0.04]"
         >
           {SESSIONS.map((option) => (
             <li key={option} role="presentation">

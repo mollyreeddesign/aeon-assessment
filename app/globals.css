@@ -144,8 +144,8 @@
 }
 
 :root {
-  /* rgb(253 250 238) */
-  --background: #fdfaee;
+  /* app canvas */
+  --background: #ece8d8;
   --foreground: #18181b;
 }
 

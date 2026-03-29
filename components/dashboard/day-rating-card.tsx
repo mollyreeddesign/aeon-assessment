@@ -10,7 +10,7 @@ export function DayRatingCard({
   message,
 }: DayRatingCardProps) {
   return (
-    <article className="mx-4 mt-5 rounded-3xl bg-white p-5 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
+    <article className="mx-4 mt-5 rounded-3xl bg-[#FDF9EB] p-5 shadow-[0_2px_8px_rgba(0,0,0,0.028)]">
       <div className="flex gap-4">
         <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-amber-300">
           <Smile className="h-8 w-8 text-white" strokeWidth={2} />

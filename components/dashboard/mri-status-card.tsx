@@ -3,7 +3,7 @@ import { ChevronRight } from "lucide-react";
 
 export function MriStatusCard() {
   return (
-    <article className="mx-4 mt-5 overflow-hidden rounded-3xl bg-white shadow-[0_8px_32px_rgba(0,0,0,0.1)]">
+    <article className="mx-4 mt-5 overflow-hidden rounded-3xl bg-[#FDF9EB] shadow-[0_2px_10px_rgba(0,0,0,0.04)]">
       <div className="relative overflow-hidden rounded-t-3xl bg-black">
         <div className="relative aspect-video w-full">
           <Image
@@ -15,7 +15,7 @@ export function MriStatusCard() {
             priority={false}
           />
           <div className="pointer-events-none absolute inset-0 z-10 p-4">
-            <div className="inline-flex items-center gap-2 rounded-full bg-zinc-200 px-3 py-1.5 shadow-sm">
+            <div className="inline-flex items-center gap-2 rounded-full bg-zinc-200 px-3 py-1.5 shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
               <span
                 className="h-2 w-2 shrink-0 rounded-full bg-emerald-500"
                 aria-hidden
@@ -28,10 +28,10 @@ export function MriStatusCard() {
         </div>
       </div>
 
-      <div className="bg-zinc-100 px-5 pb-5 pt-3">
+      <div className="bg-[#FDF9EB] px-5 pb-5 pt-3">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold text-zinc-950">
-            Plus MRI Results
+            MRI Results: Plus
           </h2>
           <p className="text-base font-medium text-zinc-950">12/11/2025</p>
         </div>
@@ -65,7 +65,7 @@ export function MriStatusCard() {
 
         <button
           type="button"
-          className="mt-5 flex items-center justify-center gap-1.5 rounded-full bg-zinc-200 px-[19px] py-[14px] font-medium text-md text-[#200201] transition hover:bg-zinc-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500"
+          className="mt-5 flex items-center justify-center gap-1.5 rounded-full bg-[#514c2410] px-[19px] py-[14px] font-medium text-md text-[#200201] transition hover:bg-[#514c2420] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500"
         >
           Open Report
           <ChevronRight

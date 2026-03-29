@@ -49,7 +49,7 @@ export function ScreeningStatusLabel() {
         <div
           id={tipId}
           role="tooltip"
-          className="absolute right-0 top-full z-20 mt-1.5 w-[min(16.5rem,calc(100vw-2rem))] rounded-lg bg-zinc-200 px-3 py-2.5 text-left text-base text-[#200201] shadow-lg ring-1 ring-zinc-300/80"
+          className="absolute right-0 top-full z-20 mt-1.5 w-[min(16.5rem,calc(100vw-2rem))] rounded-lg bg-zinc-200 px-3 py-2.5 text-left text-base text-[#200201] shadow-[0_2px_6px_rgba(0,0,0,0.05)] ring-1 ring-zinc-300/70"
         >
           {TOOLTIP_TEXT}
         </div>

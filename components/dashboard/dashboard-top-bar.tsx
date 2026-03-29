@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { BrandLogo } from "@/components/dashboard/brand-logo";
 
 type DashboardTopBarProps = {
@@ -19,17 +21,27 @@ export function DashboardTopBar({ tone = "dark" }: DashboardTopBarProps) {
     >
       <div className="relative grid grid-cols-[1fr_auto_1fr] items-center gap-2">
         <div aria-hidden />
-        <BrandLogo
-          className={
+        <Link
+          href="/"
+          aria-label="Home"
+          className={`inline-flex shrink-0 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
             isLight
-              ? "h-7 w-auto text-zinc-900 drop-shadow-[0_1px_2px_rgba(0,0,0,0.06)]"
-              : "h-7 w-auto text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.65)]"
-          }
-        />
+              ? "focus-visible:outline-zinc-500"
+              : "focus-visible:outline-white/80"
+          }`}
+        >
+          <BrandLogo
+            className={
+              isLight
+                ? "h-7 w-auto text-zinc-900 drop-shadow-[0_1px_1px_rgba(0,0,0,0.04)]"
+                : "h-7 w-auto text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.65)]"
+            }
+          />
+        </Link>
         <div className="flex justify-end">
           <button
             type="button"
-            className={`relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-zinc-900 shadow-sm transition hover:bg-zinc-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
+            className={`relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-zinc-900 shadow-[0_1px_2px_rgba(0,0,0,0.035)] transition hover:bg-zinc-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
               isLight
                 ? "focus-visible:outline-zinc-400"
                 : "focus-visible:outline-white/80"

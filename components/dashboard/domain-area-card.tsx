@@ -36,9 +36,9 @@ export function DomainAreaCard({
   openHref,
 }: DomainAreaCardProps) {
   const openClassName =
-    "inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full bg-zinc-200 px-[19px] py-[14px] font-medium text-md text-[#200201] transition hover:bg-zinc-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500";
+    "inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full bg-[#514c2410] px-[19px] py-[14px] font-medium text-md text-[#200201] transition hover:bg-[#514c2420] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500";
   return (
-    <div className="rounded-2xl bg-white p-4 shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
+    <div className="rounded-2xl bg-[#FDF9EB] p-4 shadow-[0_1px_4px_rgba(0,0,0,0.022)]">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="flex items-center gap-2 pt-3">

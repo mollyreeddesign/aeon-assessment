@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Stethoscope } from "lucide-react";
+import { Flame, Stethoscope } from "lucide-react";
 
 import { DashboardTopBar } from "@/components/dashboard/dashboard-top-bar";
 import { ScreeningStatusLabel } from "@/components/dashboard/screening-status-label";
@@ -15,6 +15,8 @@ export const metadata: Metadata = {
 /** Warm peach—distinct from Domains mint (`#e2f6c8`). */
 const headerSurfaceClass = "bg-[#fde8d4]";
 
+const domainIconClass = "h-8 w-8 shrink-0 text-[#200201]";
+
 export default function MetabolismPage() {
   return (
     <div className="pb-28">
@@ -27,7 +29,7 @@ export default function MetabolismPage() {
         subtitle="Review energy use, blood sugar balance, and how your body processes nutrients."
       />
       <div className="space-y-5 px-4 pt-5">
-        <section className="rounded-2xl border border-stone-200/80 bg-[#f9f7f3] px-4 py-4 shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
+        <section className="rounded-2xl border border-stone-200/80 bg-[#FDF9EB] px-4 py-4 shadow-[0_1px_4px_rgba(0,0,0,0.022)]">
           <div className="flex items-center gap-2">
             <Stethoscope
               className="h-4 w-4 shrink-0 text-zinc-700"
@@ -48,11 +50,18 @@ export default function MetabolismPage() {
             Dr. Maya Chen · Mar 29, 2026
           </p>
         </section>
-        <section className="rounded-2xl border border-stone-200/80 bg-white px-4 py-4 shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
+        <section className="rounded-2xl border border-stone-200/80 bg-[#FDF9EB] px-4 py-4 shadow-[0_1px_4px_rgba(0,0,0,0.022)]">
           <div className="flex items-start justify-between gap-3">
-            <h3 className="font-serif text-lg font-semibold text-zinc-900">
-              Metabolism status
-            </h3>
+            <div className="flex min-w-0 items-center gap-2 pt-2">
+              <Flame
+                className={domainIconClass}
+                strokeWidth={1.75}
+                aria-hidden
+              />
+              <h3 className="font-serif text-lg font-semibold leading-none text-zinc-900">
+                Metabolism
+              </h3>
+            </div>
             <div className="flex shrink-0 flex-col items-end text-right">
               <span className="font-sans text-2xl font-semibold tabular-nums tracking-tight text-zinc-900">
                 50%

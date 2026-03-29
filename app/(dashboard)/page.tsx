@@ -1,6 +1,6 @@
 import { CalorieHeader } from "@/components/dashboard/calorie-header";
 import { DayRatingCard } from "@/components/dashboard/day-rating-card";
-import { MacroCard } from "@/components/dashboard/macro-card";
+import { HealthGoalCard } from "@/components/dashboard/health-goal-card";
 import { HealthDomainsSection } from "@/components/dashboard/health-domains-section";
 import { MriStatusCard } from "@/components/dashboard/mri-status-card";
 import { QuickActions } from "@/components/dashboard/quick-actions";
@@ -14,13 +14,13 @@ export default function DiaryPage() {
         healthScore={83}
         ringFillPercent={84}
       />
-      <MacroCard />
+      <HealthGoalCard />
       <MriStatusCard />
       <HealthDomainsSection />
       <QuickActions />
       <DayRatingCard message="Eat more healthy carbs to boost your day rating!" />
 
-      <section className="mx-4 mt-6 rounded-2xl border border-dashed border-zinc-200/80 bg-white/50 px-4 py-6 text-center">
+      <section className="mx-4 mt-6 rounded-2xl border border-dashed border-zinc-200/80 bg-[#FDF9EB]/90 px-4 py-6 text-center">
         <p className="text-xs font-medium uppercase tracking-widest text-zinc-400">
           Meals
         </p>

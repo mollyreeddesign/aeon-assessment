@@ -9,14 +9,14 @@ export default function AddPage() {
         subtitle="Search the database or add something quickly."
       />
       <div className="space-y-4 px-4 pt-2">
-        <div className="flex gap-2 rounded-2xl bg-white p-2 shadow-[0_4px_24px_rgba(0,0,0,0.05)]">
+        <div className="flex gap-2 rounded-2xl bg-[#FDF9EB] p-2 shadow-[0_1px_5px_rgba(0,0,0,0.025)]">
           <div className="flex flex-1 items-center gap-2 rounded-xl bg-zinc-100 px-3 py-2.5">
             <Search className="h-5 w-5 shrink-0 text-zinc-400" strokeWidth={2} />
             <span className="text-sm text-zinc-400">Search foods & meals</span>
           </div>
           <button
             type="button"
-            className="flex shrink-0 items-center justify-center rounded-xl bg-zinc-200 px-4 text-[#200201] transition hover:bg-zinc-300"
+            className="flex shrink-0 items-center justify-center rounded-xl bg-[#514c2410] px-4 text-[#200201] transition hover:bg-[#514c2420]"
             aria-label="Scan barcode"
           >
             <Camera className="h-5 w-5" strokeWidth={2} />
@@ -27,7 +27,7 @@ export default function AddPage() {
             <button
               key={meal}
               type="button"
-              className="rounded-2xl bg-white py-4 text-sm font-semibold text-zinc-800 shadow-[0_4px_20px_rgba(0,0,0,0.04)] transition hover:bg-zinc-50"
+              className="rounded-2xl bg-[#514c2410] py-4 text-sm font-semibold text-zinc-800 shadow-[0_1px_4px_rgba(0,0,0,0.022)] transition hover:bg-[#514c2420]"
             >
               {meal}
             </button>

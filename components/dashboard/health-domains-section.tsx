@@ -3,7 +3,7 @@ import { ChevronRight } from "lucide-react";
 
 export function HealthDomainsSection() {
   return (
-    <section className="mx-4 mt-5 rounded-3xl bg-white px-5 py-5 shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
+    <section className="mx-4 mt-5 rounded-3xl bg-[#FDF9EB] px-5 py-5 shadow-[0_2px_8px_rgba(0,0,0,0.03)]">
       <h2 className="text-xl font-semibold text-zinc-950">
         Health Domains
       </h2>
@@ -12,7 +12,7 @@ export function HealthDomainsSection() {
       </p>
       <Link
         href="/domains"
-        className="mt-5 inline-flex items-center gap-1.5 rounded-full bg-zinc-200 px-[19px] py-[14px] font-medium text-md text-[#200201] transition hover:bg-zinc-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500"
+        className="mt-5 inline-flex items-center gap-1.5 rounded-full bg-[#514c2410] px-[19px] py-[14px] font-medium text-md text-[#200201] transition hover:bg-[#514c2420] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500"
       >
         View Domains
         <ChevronRight

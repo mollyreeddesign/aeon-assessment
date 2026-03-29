@@ -88,7 +88,7 @@ function BookScanIcon() {
 function AskAeonRoundIcon() {
   return (
     <span
-      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[rgb(253,168,123)] shadow-[inset_0_1px_0_rgba(255,255,255,0.35)]"
+      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[rgb(253,168,123)] shadow-[inset_0_1px_0_rgba(255,255,255,0.22)]"
       aria-hidden
     >
       <svg
@@ -146,7 +146,7 @@ export function QuickActions() {
           <button
             key={item.title}
             type="button"
-            className="flex flex-col items-start gap-3 rounded-[2rem] bg-white p-6 text-left shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition hover:shadow-[0_12px_36px_rgba(0,0,0,0.1)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"
+            className="flex flex-col items-start gap-3 rounded-[2rem] bg-[#FDF9EB] p-6 text-left shadow-[0_2px_8px_rgba(0,0,0,0.03)] transition hover:shadow-[0_3px_12px_rgba(0,0,0,0.045)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"
           >
             <ActionLeadingIcon item={item} />
             <div className="min-w-0">

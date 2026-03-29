@@ -30,7 +30,7 @@ export default function DietsPage() {
           <li key={p.name}>
             <button
               type="button"
-              className="flex w-full flex-col items-start rounded-2xl bg-white p-4 text-left shadow-[0_4px_20px_rgba(0,0,0,0.04)] transition hover:bg-zinc-50"
+              className="flex w-full flex-col items-start rounded-2xl bg-[#514c2410] p-4 text-left shadow-[0_1px_4px_rgba(0,0,0,0.022)] transition hover:bg-[#514c2420]"
             >
               <div className="flex w-full items-center justify-between gap-2">
                 <span className="font-serif text-lg font-semibold text-zinc-900">

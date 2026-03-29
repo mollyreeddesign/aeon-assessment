@@ -11,7 +11,7 @@ export function DateNav({ label }: DateNavProps) {
     <div className="mx-4 mt-5 flex items-center justify-between rounded-2xl bg-zinc-100/90 px-3 py-2.5">
       <button
         type="button"
-        className="rounded-full p-1.5 text-zinc-500 transition hover:bg-zinc-200/80 hover:text-zinc-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"
+        className="rounded-full p-1.5 text-zinc-500 transition hover:bg-[#514c2420] hover:text-zinc-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"
         aria-label="Previous day"
       >
         <ChevronLeft className="h-5 w-5" strokeWidth={2} />
@@ -22,7 +22,7 @@ export function DateNav({ label }: DateNavProps) {
       </div>
       <button
         type="button"
-        className="rounded-full p-1.5 text-zinc-500 transition hover:bg-zinc-200/80 hover:text-zinc-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"
+        className="rounded-full p-1.5 text-zinc-500 transition hover:bg-[#514c2420] hover:text-zinc-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"
         aria-label="Next day"
       >
         <ChevronRight className="h-5 w-5" strokeWidth={2} />

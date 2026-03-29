@@ -3,7 +3,15 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { TrendingUp } from "lucide-react";
-import type { ComponentType, SVGProps } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ComponentType,
+  type SVGProps,
+} from "react";
 
 import { BrainIcon } from "@/components/icons/brain-icon";
 
@@ -60,47 +68,119 @@ type NavIcon = ComponentType<{
   strokeWidth?: number;
 }>;
 
-type NavItemProps = {
-  href: string;
-  label: string;
-  Icon: NavIcon;
-};
+const NAV_ITEMS: { href: string; label: string; Icon: NavIcon }[] = [
+  { href: "/", label: "Home", Icon: SquaresFourIcon },
+  { href: "/domains", label: "Domains", Icon: BrainIcon },
+  { href: "/diets", label: "Goals", Icon: TrendingUp },
+  { href: "/recipes", label: "Book", Icon: CalendarBlankIcon },
+];
 
-function NavItem({ href, label, Icon }: NavItemProps) {
-  const pathname = usePathname();
-  const active =
-    href === "/" ? pathname === "/" : pathname.startsWith(href);
-
-  return (
-    <Link
-      href={href}
-      className={`flex flex-col items-center gap-0.5 pb-1 pt-2 text-[10px] font-medium tracking-wide transition ${
-        active ? "text-[#16a34a]" : "text-zinc-400 hover:text-zinc-600"
-      }`}
-    >
-      <Icon
-        className="h-6 w-6"
-        strokeWidth={active ? 2.25 : 1.75}
-        aria-hidden
-      />
-      {label}
-    </Link>
-  );
+function isActive(pathname: string, href: string) {
+  return href === "/" ? pathname === "/" : pathname.startsWith(href);
 }
 
 export function BottomNav() {
+  const pathname = usePathname();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const [pill, setPill] = useState({
+    left: 0,
+    top: 0,
+    width: 0,
+    height: 0,
+    opacity: 0,
+  });
+  const [motionReady, setMotionReady] = useState(false);
+
+  const updatePill = useCallback(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const activeIndex = NAV_ITEMS.findIndex((item) =>
+      isActive(pathname, item.href),
+    );
+    if (activeIndex < 0) return;
+    const el = itemRefs.current[activeIndex];
+    if (!el) return;
+    const cr = container.getBoundingClientRect();
+    const er = el.getBoundingClientRect();
+    setPill({
+      left: er.left - cr.left,
+      top: er.top - cr.top,
+      width: er.width,
+      height: er.height,
+      opacity: 1,
+    });
+  }, [pathname]);
+
+  useLayoutEffect(() => {
+    updatePill();
+    const id = requestAnimationFrame(() => setMotionReady(true));
+    return () => cancelAnimationFrame(id);
+  }, [updatePill]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const ro = new ResizeObserver(() => updatePill());
+    ro.observe(container);
+    window.addEventListener("resize", updatePill);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", updatePill);
+    };
+  }, [updatePill]);
+
   return (
     <nav
       className="pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center"
       aria-label="Main"
     >
       <div className="pointer-events-auto relative mx-auto w-full max-w-md px-3">
-        <div className="rounded-t-3xl bg-white px-2 pb-[max(0.50rem,env(safe-area-inset-bottom))] pt-1 shadow-[0_-8px_30px_rgba(0,0,0,0.06)]">
-          <div className="flex h-16 items-center justify-around">
-            <NavItem href="/" label="Home" Icon={SquaresFourIcon} />
-            <NavItem href="/domains" label="Domains" Icon={BrainIcon} />
-            <NavItem href="/diets" label="Goals" Icon={TrendingUp} />
-            <NavItem href="/recipes" label="Book" Icon={CalendarBlankIcon} />
+        <div className="rounded-t-3xl bg-[#FDF9EB] px-2 pb-[max(0.50rem,env(safe-area-inset-bottom))] pt-1 shadow-[0_-3px_12px_rgba(0,0,0,0.035)]">
+          <div
+            ref={containerRef}
+            className="relative flex h-16 items-center justify-around"
+          >
+            <div
+              className={`pointer-events-none absolute z-0 rounded-2xl bg-[#fda87b] ${
+                motionReady
+                  ? "transition-[left,top,width,height,opacity] duration-[340ms] ease-[cubic-bezier(0.33,1,0.68,1)]"
+                  : "transition-none"
+              }`}
+              style={{
+                left: pill.left,
+                top: pill.top,
+                width: pill.width,
+                height: pill.height,
+                opacity: pill.opacity,
+              }}
+              aria-hidden
+            />
+            {NAV_ITEMS.map(({ href, label, Icon }, i) => {
+              const active = isActive(pathname, href);
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  ref={(el) => {
+                    itemRefs.current[i] = el;
+                  }}
+                  className={`relative z-10 flex min-w-[4rem] flex-col items-center gap-0.5 rounded-2xl px-3 py-1.5 text-[10px] font-medium tracking-wide transition-colors ${
+                    active
+                      ? "text-[#200201]"
+                      : "text-zinc-400 hover:bg-black/[0.04] hover:text-zinc-600"
+                  }`}
+                  aria-current={active ? "page" : undefined}
+                >
+                  <Icon
+                    className="h-6 w-6 shrink-0"
+                    strokeWidth={active ? 2.25 : 1.75}
+                    aria-hidden
+                  />
+                  {label}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>

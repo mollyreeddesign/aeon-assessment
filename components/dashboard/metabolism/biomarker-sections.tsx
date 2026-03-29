@@ -244,11 +244,11 @@ function LevelIndicator({ level, favorable }: { level: Level; favorable: boolean
 
 export function BiomarkerSections() {
   return (
-    <section className="rounded-2xl border border-stone-200/80 bg-white px-4 py-4 shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
+    <section className="rounded-2xl border border-stone-200/80 bg-[#FDF9EB] px-4 py-4 shadow-[0_1px_4px_rgba(0,0,0,0.022)]">
       <h3 className="font-serif text-lg font-semibold text-zinc-900">
         Key biomarkers
       </h3>
-      <p className="mt-2 text-xs text-zinc-500">
+      <p className="mt-2 text-sm text-zinc-500">
         Grouped indicators of metabolic health. Green means favorable; red means
         worth attention. Expand each row for detail.
       </p>
@@ -264,11 +264,11 @@ export function BiomarkerSections() {
 
       <div className="mt-4 space-y-4">
         {sections.map((section) => (
-          <div key={section.title} className="rounded-xl border border-zinc-100">
-            <h4 className="border-b border-zinc-100 bg-[#b2d0f780] px-3 py-2 text-center font-serif text-[17px] font-semibold tracking-tight text-zinc-900">
+          <div key={section.title} className="rounded-xl border border-zinc-300/80">
+            <h4 className="border-b border-zinc-300/80 bg-[#b2d0f780] px-3 py-2 text-center font-serif text-[17px] font-semibold tracking-tight text-zinc-900">
               {section.title}
             </h4>
-            <ul className="divide-y divide-zinc-100">
+            <ul className="divide-y divide-zinc-300/75">
               {section.items.map((item) => (
                 <li key={item.name} className="px-2 py-1.5">
                   <details className="group">

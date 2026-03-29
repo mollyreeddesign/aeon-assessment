@@ -24,11 +24,11 @@ export function ResultsTimeline() {
     .join(" ");
 
   return (
-    <section className="rounded-2xl border border-stone-200/80 bg-white px-4 py-4 shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
+    <section className="rounded-2xl border border-stone-200/80 bg-[#FDF9EB] px-4 py-4 shadow-[0_1px_4px_rgba(0,0,0,0.022)]">
       <h3 className="font-serif text-lg font-semibold text-zinc-900">
         Your Results
       </h3>
-      <p className="mt-1 text-xs text-zinc-500">
+      <p className="mt-1 text-sm text-zinc-500">
         Metabolic health score over recent visits (illustrative trend).
       </p>
       <div className="mt-4 overflow-x-auto">

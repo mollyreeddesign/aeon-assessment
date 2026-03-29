@@ -32,7 +32,7 @@ export default function EditMetabolismGoalPage() {
         title="Edit Goal"
       />
       <section className="px-4 pt-5">
-        <div className="rounded-2xl border border-stone-200/80 bg-white px-4 py-5 shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
+        <div className="rounded-2xl border border-stone-200/80 bg-[#FDF9EB] px-4 py-5 shadow-[0_1px_4px_rgba(0,0,0,0.022)]">
           <label className="block">
             <span className="text-xs font-medium uppercase tracking-wide text-zinc-500">
               Goal title
@@ -99,7 +99,7 @@ export default function EditMetabolismGoalPage() {
           <button
             type="button"
             onClick={() => router.push("/")}
-            className="mt-5 flex w-full items-center justify-center rounded-full bg-zinc-200 px-5 py-3 text-sm font-semibold text-[#200201] transition hover:bg-zinc-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500"
+            className="mt-5 flex w-full items-center justify-center rounded-full bg-[#514c2410] px-5 py-3 text-sm font-semibold text-[#200201] transition hover:bg-[#514c2420] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500"
           >
             Save and Pin
           </button>

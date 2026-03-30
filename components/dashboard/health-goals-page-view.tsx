@@ -45,7 +45,7 @@ type GoalIcon = ComponentType<{
 }>;
 
 const CHECKBOX_CLASS =
-  "mt-0.5 size-4 shrink-0 cursor-pointer rounded-sm border border-zinc-400 bg-[#FDF9EB] accent-zinc-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400";
+  "size-5 shrink-0 cursor-pointer rounded-[0.3rem] border-[1.5px] border-zinc-500 bg-[#FDF9EB] accent-[#200201] shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400";
 
 const CORE_GOAL_META: {
   id: Exclude<HealthGoalChecklistId, "metabolism">;
@@ -210,7 +210,7 @@ export function HealthGoalsPageView() {
               <ul className="mt-3 flex flex-col gap-3">
                 {items.map((task, taskIndex) => (
                   <li key={task}>
-                    <label className="flex cursor-pointer items-start gap-3 text-left">
+                    <label className="flex cursor-pointer items-center gap-3 text-left">
                       <input
                         type="checkbox"
                         checked={isChecked(id, taskIndex)}
@@ -219,7 +219,13 @@ export function HealthGoalsPageView() {
                         }
                         className={CHECKBOX_CLASS}
                       />
-                      <span className="text-sm leading-snug text-zinc-800">
+                      <span
+                        className={`text-sm leading-snug ${
+                          isChecked(id, taskIndex)
+                            ? "text-zinc-500 line-through"
+                            : "text-zinc-800"
+                        }`}
+                      >
                         {task}
                       </span>
                     </label>
@@ -255,7 +261,7 @@ export function HealthGoalsPageView() {
               <ul className="mt-3 flex flex-col gap-3">
                 {HEALTH_GOAL_CHECKLISTS.metabolism.items.map((task, taskIndex) => (
                   <li key={task}>
-                    <label className="flex cursor-pointer items-start gap-3 text-left">
+                    <label className="flex cursor-pointer items-center gap-3 text-left">
                       <input
                         type="checkbox"
                         checked={isChecked("metabolism", taskIndex)}
@@ -264,7 +270,13 @@ export function HealthGoalsPageView() {
                         }
                         className={CHECKBOX_CLASS}
                       />
-                      <span className="text-sm leading-snug text-zinc-800">
+                      <span
+                        className={`text-sm leading-snug ${
+                          isChecked("metabolism", taskIndex)
+                            ? "text-zinc-500 line-through"
+                            : "text-zinc-800"
+                        }`}
+                      >
                         {task}
                       </span>
                     </label>

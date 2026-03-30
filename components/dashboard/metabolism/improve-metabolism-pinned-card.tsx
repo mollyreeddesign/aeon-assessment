@@ -10,10 +10,13 @@ import {
 } from "@/components/dashboard/health-goals-data";
 
 const checkboxClass =
-  "mt-0.5 size-4 shrink-0 cursor-pointer rounded-sm border border-zinc-400 bg-[#FDF9EB] accent-zinc-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400";
+  "size-5 shrink-0 cursor-pointer rounded-[0.3rem] border-[1.5px] border-zinc-500 bg-[#FDF9EB] accent-[#200201] shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400";
 
 export function ImproveMetabolismPinnedCard() {
   const [expanded, setExpanded] = useState(false);
+  const [checked, setChecked] = useState<boolean[]>(
+    () => improveMetabolismDailyTasks.map(() => false),
+  );
 
   useEffect(() => {
     const id = requestAnimationFrame(() => setExpanded(true));
@@ -27,7 +30,7 @@ export function ImproveMetabolismPinnedCard() {
         onClick={() => setExpanded((e) => !e)}
         aria-expanded={expanded}
         aria-controls="improve-metabolism-checklist"
-        className="flex w-full items-start gap-3 text-left transition hover:opacity-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"
+        className="flex w-full items-center gap-3 text-left transition hover:opacity-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"
       >
         <div
           className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl shadow-[0_1px_3px_rgba(0,0,0,0.04)] transition-colors duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
@@ -68,11 +71,26 @@ export function ImproveMetabolismPinnedCard() {
               {improveMetabolismDailyGoalsHeading}
             </h4>
             <ul className="mt-3 flex flex-col gap-3">
-              {improveMetabolismDailyTasks.map((task) => (
+              {improveMetabolismDailyTasks.map((task, index) => (
                 <li key={task}>
-                  <label className="flex cursor-pointer items-start gap-3 text-left">
-                    <input type="checkbox" className={checkboxClass} />
-                    <span className="text-sm leading-snug text-zinc-800">
+                  <label className="flex cursor-pointer items-center gap-3 text-left">
+                    <input
+                      type="checkbox"
+                      checked={checked[index] ?? false}
+                      onChange={(event) =>
+                        setChecked((prev) =>
+                          prev.map((value, i) =>
+                            i === index ? event.target.checked : value,
+                          ),
+                        )
+                      }
+                      className={checkboxClass}
+                    />
+                    <span
+                      className={`text-sm leading-snug ${
+                        checked[index] ? "text-zinc-500 line-through" : "text-zinc-800"
+                      }`}
+                    >
                       {task}
                     </span>
                   </label>

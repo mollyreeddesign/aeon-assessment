@@ -48,7 +48,7 @@ export default function EditMetabolismGoalPage() {
 
           <ul className="mt-4 space-y-3 border-t border-zinc-100 pt-4">
             {tasks.map((task, index) => (
-              <li key={`${index}-${task.text}`} className="flex items-start gap-3">
+              <li key={`${index}-${task.text}`} className="flex items-center gap-3">
                 <input
                   type="checkbox"
                   checked={task.done}
@@ -61,7 +61,7 @@ export default function EditMetabolismGoalPage() {
                       ),
                     )
                   }
-                  className="mt-2 size-4 shrink-0 rounded-sm border border-zinc-400 bg-white accent-zinc-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"
+                  className="size-5 shrink-0 rounded-[0.3rem] border-[1.5px] border-zinc-500 bg-white accent-[#200201] shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"
                 />
                 <input
                   value={task.text}
@@ -74,7 +74,9 @@ export default function EditMetabolismGoalPage() {
                       ),
                     )
                   }
-                  className="w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm text-zinc-800 outline-none focus:border-zinc-500 focus:ring-2 focus:ring-zinc-200"
+                  className={`w-full rounded-lg border border-zinc-300 px-3 py-2 text-sm outline-none focus:border-zinc-500 focus:ring-2 focus:ring-zinc-200 ${
+                    task.done ? "text-zinc-500 line-through" : "text-zinc-800"
+                  }`}
                 />
                 <button
                   type="button"

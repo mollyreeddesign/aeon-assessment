@@ -1,9 +1,12 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 
 type SubpageHeaderProps = {
   title: string;
-  subtitle?: string;
+  /** Optional small pill shown beside the title. */
+  titleBadgeText?: string;
+  subtitle?: ReactNode;
   /** Overrides default `text-sm` subtitle sizing/weight (e.g. `text-[18px] font-medium text-zinc-800`). */
   subtitleClassName?: string;
   /** Appended to the header root (e.g. override padding when using `DashboardTopBar`). */
@@ -21,6 +24,7 @@ type SubpageHeaderProps = {
 
 export function SubpageHeader({
   title,
+  titleBadgeText,
   subtitle,
   subtitleClassName,
   className,
@@ -81,13 +85,20 @@ export function SubpageHeader({
             </span>
           </Link>
         ) : null}
-        <h1
-          className={`font-serif text-3xl font-semibold tracking-tight ${
-            isSolid ? "text-zinc-950" : ""
-          }`}
-        >
-          {title}
-        </h1>
+        <div className="flex flex-wrap items-center gap-2">
+          <h1
+            className={`font-serif text-3xl font-semibold tracking-tight ${
+              isSolid ? "text-zinc-950" : ""
+            }`}
+          >
+            {title}
+          </h1>
+          {titleBadgeText ? (
+            <span className="inline-flex items-center rounded-full bg-[#514c2410] px-2.5 py-1 text-xs font-semibold text-zinc-700">
+              {titleBadgeText}
+            </span>
+          ) : null}
+        </div>
         {subtitle ? (
           <p
             className={`mt-2 max-w-sm leading-relaxed ${

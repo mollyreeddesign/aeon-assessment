@@ -24,8 +24,8 @@ const actions: ActionItem[] = [
     variant: "book-scan",
   },
   {
-    title: "Ask AI about your Results",
-    subtitle: "24/7 Support",
+    title: "Ask Fin about your Results",
+    subtitle: "24/7 AI Support",
     variant: "aeon-round",
   },
   {

@@ -104,6 +104,7 @@ export function HealthGoalsPageView() {
         className="!pt-[calc(env(safe-area-inset-top,0px)+7rem)] !pb-[30px]"
         solidSurfaceClassName={headerSurfaceClass}
         title="Health Goals"
+        titleBadgeText="Not Designed"
         subtitle="Daily checklists that mirror your home screen—track habits that support your screening results."
       />
 

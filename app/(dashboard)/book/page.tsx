@@ -21,6 +21,7 @@ export default function BookPage() {
         className="!pt-[calc(env(safe-area-inset-top,0px)+7rem)] !pb-[30px]"
         solidSurfaceClassName={headerSurfaceClass}
         title="Book"
+        titleBadgeText="Not Designed"
         subtitle="Schedule follow-up imaging and assessments with Aeon."
       />
       <div className="px-4 pt-5">

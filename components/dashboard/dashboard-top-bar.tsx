@@ -14,6 +14,7 @@ type DashboardTopBarProps = {
 const SCROLL_RANGE = 100;
 const LOGO_MAX_PX = 28;
 const LOGO_MIN_PX = 20;
+const LOGO_ASPECT_RATIO = 385 / 112;
 
 /**
  * Fixed logo + profile row; stays visible while the diary scrolls.
@@ -37,36 +38,39 @@ export function DashboardTopBar({ tone = "dark" }: DashboardTopBarProps) {
   }, [updateScroll]);
 
   const logoHeightPx = LOGO_MAX_PX - scrollProgress * (LOGO_MAX_PX - LOGO_MIN_PX);
+  const logoWidthPx = logoHeightPx * LOGO_ASPECT_RATIO;
   const pillOpacity = scrollProgress;
+  const pillPaddingX = pillOpacity * logoHeightPx * 0.65;
+  const pillPaddingY = pillOpacity * logoHeightPx * 0.34;
 
   const logoOnDark = (
     <span
-      className="relative inline-flex shrink-0 items-center"
-      style={{ height: logoHeightPx }}
+      className="relative inline-flex shrink-0 items-center justify-center"
+      style={{ height: logoHeightPx, width: logoWidthPx }}
     >
       <span
-        className="flex h-full items-center transition-opacity duration-300 ease-out"
+        className="flex h-full w-full items-center justify-center transition-opacity duration-300 ease-out"
         style={{ opacity: 1 - pillOpacity * 0.98 }}
         aria-hidden
       >
-        <BrandLogo className="h-full w-auto text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.65)]" />
+        <BrandLogo className="h-full w-full text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.65)]" />
       </span>
       <span
-        className="pointer-events-none absolute left-0 top-0 flex h-full items-center transition-opacity duration-300 ease-out"
+        className="pointer-events-none absolute left-0 top-0 flex h-full w-full items-center justify-center transition-opacity duration-300 ease-out"
         style={{ opacity: pillOpacity }}
         aria-hidden
       >
-        <BrandLogo className="h-full w-auto text-zinc-900" />
+        <BrandLogo className="h-full w-full text-zinc-900" />
       </span>
     </span>
   );
 
   const logoLightOnly = (
     <span
-      className="inline-flex shrink-0 items-center"
-      style={{ height: logoHeightPx }}
+      className="inline-flex shrink-0 items-center justify-center"
+      style={{ height: logoHeightPx, width: logoWidthPx }}
     >
-      <BrandLogo className="h-full w-auto text-zinc-900 drop-shadow-[0_1px_1px_rgba(0,0,0,0.04)]" />
+      <BrandLogo className="h-full w-full text-zinc-900 drop-shadow-[0_1px_1px_rgba(0,0,0,0.04)]" />
     </span>
   );
 
@@ -82,7 +86,7 @@ export function DashboardTopBar({ tone = "dark" }: DashboardTopBarProps) {
           <Link
             href="/"
             aria-label="Home"
-            className={`inline-flex shrink-0 items-center justify-center rounded-full transition-[box-shadow] duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
+            className={`inline-flex w-fit shrink-0 items-center justify-center rounded-full transition-[box-shadow] duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
               isLight
                 ? "focus-visible:outline-zinc-500"
                 : "focus-visible:outline-white/80"
@@ -93,10 +97,10 @@ export function DashboardTopBar({ tone = "dark" }: DashboardTopBarProps) {
                 pillOpacity > 0.08
                   ? `0 2px 12px rgba(0,0,0,${0.04 + pillOpacity * 0.05})`
                   : "none",
-              paddingLeft: `${pillOpacity * 18}px`,
-              paddingRight: `${pillOpacity * 18}px`,
-              paddingTop: `${pillOpacity * 10}px`,
-              paddingBottom: `${pillOpacity * 10}px`,
+              paddingLeft: `${pillPaddingX}px`,
+              paddingRight: `${pillPaddingX}px`,
+              paddingTop: `${pillPaddingY}px`,
+              paddingBottom: `${pillPaddingY}px`,
             }}
           >
             {isLight ? logoLightOnly : logoOnDark}

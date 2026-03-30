@@ -4,7 +4,7 @@ import { ChevronRight } from "lucide-react";
 
 export function EducationalLibrarySection() {
   return (
-    <section className="mx-4 mt-5 rounded-3xl bg-[#FDF9EB] px-5 py-5 shadow-[0_2px_8px_rgba(0,0,0,0.03)]">
+    <section className="mx-4 mt-5 rounded-3xl bg-[#F3EEFF]/60 px-5 py-5 shadow-[0_2px_8px_rgba(0,0,0,0.03)]">
       <h2 className="text-xl font-semibold text-zinc-950">
         Educational Library
       </h2>

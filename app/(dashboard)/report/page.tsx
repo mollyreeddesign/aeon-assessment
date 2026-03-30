@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUp, Calendar, Minus } from "lucide-react";
 
 import { DashboardTopBar } from "@/components/dashboard/dashboard-top-bar";
 import { SubpageHeader } from "@/components/dashboard/subpage-header";
@@ -75,8 +75,17 @@ export default function OpenReportPage() {
         className="!pt-[calc(env(safe-area-inset-top,0px)+7rem)] !pb-[30px]"
         solidSurfaceClassName={headerSurfaceClass}
         title="MRI Results: Plus"
-        subtitle="Check-Up Date: 12/11/2025 Dr. Maya Chen"
-        subtitleClassName="text-[18px] font-medium text-zinc-800"
+        subtitle={
+          <>
+            <span className="block text-[18px] font-medium text-zinc-800">
+              Check-Up Date: 12/11/2025
+            </span>
+            <span className="mt-1 block text-sm font-medium text-zinc-500">
+              Dr. Maya Chen · Zentrum für Bilddiagnostik, 4310 Rheinfelden
+            </span>
+          </>
+        }
+        subtitleClassName="leading-relaxed"
       />
 
       <div className="space-y-5 px-4 pt-5">
@@ -118,15 +127,117 @@ export default function OpenReportPage() {
           </div>
         </section>
 
+        <section className="rounded-2xl border border-stone-200/80 bg-[#F3EEFF]/55 px-4 py-5 shadow-[0_1px_4px_rgba(0,0,0,0.022)]">
+          <h3 className="font-serif text-lg font-semibold text-zinc-900">
+            View Full Report
+          </h3>
+          <p className="mt-2 text-sm leading-relaxed text-zinc-700">
+            Explore the complete report with all measured values, reference
+            ranges, and expanded notes for each body system.
+          </p>
+          <button
+            type="button"
+            className="mt-4 inline-flex w-fit max-w-full items-center justify-center gap-1.5 rounded-full bg-[#514c2410] px-[19px] py-[14px] text-md font-medium text-[#200201] transition hover:bg-[#514c2420] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500"
+          >
+            View Full Report
+            <ArrowRight className="h-4 w-4 shrink-0" strokeWidth={2.5} aria-hidden />
+          </button>
+        </section>
+
         <div className="pt-1">
           <h2 className="font-serif text-xl font-semibold tracking-tight text-zinc-950">
-            Key imaging findings
+            Results Overview Summary
           </h2>
-          <p className="mt-1.5 max-w-[22rem] text-sm leading-relaxed text-zinc-600">
-            A concise interpretation of what your whole-body MRI suggests across
-            major systems—not a substitute for your clinician’s full report.
-          </p>
         </div>
+
+        <section className={cardClass} aria-labelledby="blood-heading">
+          <h3
+            id="blood-heading"
+            className="font-serif text-lg font-semibold text-zinc-900"
+          >
+            Blood biomarkers
+          </h3>
+          <div className="mt-2">
+            <DomainStatusAttention>Review recommended</DomainStatusAttention>
+          </div>
+          <div className="mt-4 grid grid-cols-3 gap-2">
+            <div className="rounded-xl border border-stone-200/80 bg-white/80 px-3 py-2.5 text-center shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+              <p className="text-[10px] font-medium uppercase tracking-wide text-zinc-500">
+                ALT
+              </p>
+              <div className="mt-1 flex items-center justify-center gap-1.5">
+                <p className="text-sm font-semibold tabular-nums text-zinc-900">
+                  44 U/L
+                </p>
+                <span
+                  className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#514c2410]"
+                  aria-label="Trending up"
+                  title="Trending up"
+                >
+                  <ArrowUp
+                    className="h-3.5 w-3.5 text-red-600"
+                    strokeWidth={2.5}
+                    aria-hidden
+                  />
+                </span>
+              </div>
+            </div>
+            <div className="rounded-xl border border-stone-200/80 bg-white/80 px-3 py-2.5 text-center shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+              <p className="text-[10px] font-medium uppercase tracking-wide text-zinc-500">
+                HOMA-IR
+              </p>
+              <div className="mt-1 flex items-center justify-center gap-1.5">
+                <p className="text-sm font-semibold tabular-nums text-zinc-900">
+                  2.7
+                </p>
+                <span
+                  className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#514c2410]"
+                  aria-label="Trending down"
+                  title="Trending down"
+                >
+                  <ArrowDown
+                    className="h-3.5 w-3.5 text-emerald-600"
+                    strokeWidth={2.5}
+                    aria-hidden
+                  />
+                </span>
+              </div>
+            </div>
+            <div className="rounded-xl border border-stone-200/80 bg-white/80 px-3 py-2.5 text-center shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+              <p className="text-[10px] font-medium uppercase tracking-wide text-zinc-500">
+                Triglycerides
+              </p>
+              <div className="mt-1 flex items-center justify-center gap-1.5">
+                <p className="text-sm font-semibold tabular-nums text-zinc-900">
+                  179 mg/dL
+                </p>
+                <span
+                  className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#514c2410]"
+                  aria-label="Stable trend"
+                  title="Stable trend"
+                >
+                  <Minus
+                    className="h-3.5 w-3.5 text-zinc-600"
+                    strokeWidth={2.5}
+                    aria-hidden
+                  />
+                </span>
+              </div>
+            </div>
+          </div>
+          <p className="mt-4 text-sm leading-relaxed text-zinc-700">
+            This panel summarizes recent blood biomarker values captured with
+            your report. Values are shown as measured so you and your clinician
+            can compare trends across future check-ins.
+          </p>
+          <div
+            className="mt-4 h-2 overflow-hidden rounded-full bg-stone-200/90"
+            role="presentation"
+            aria-hidden
+          >
+            <div className="h-full w-[64%] rounded-full bg-amber-600/85" />
+          </div>
+        </section>
 
         <section className={cardClass} aria-labelledby="cardio-heading">
           <h3
@@ -206,8 +317,7 @@ export default function OpenReportPage() {
           />
           <p className="mt-4 text-sm leading-relaxed text-zinc-700">
             Mild disc protrusion noted at L4-L5 level. This is a common finding
-            and typically asymptomatic. We recommend light core strengthening
-            exercises to maintain spinal health.
+            and typically asymptomatic.
           </p>
           <div
             className="mt-4 h-2 overflow-hidden rounded-full bg-stone-200/90"
@@ -232,33 +342,47 @@ export default function OpenReportPage() {
         </div>
 
         <section className="rounded-2xl border border-stone-200/80 bg-[#F3EEFF]/60 px-4 py-5 shadow-[0_1px_4px_rgba(0,0,0,0.022)]">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-violet-800/80">
-            Deep dive
-          </p>
-          <h2 className="mt-2 font-serif text-lg font-semibold text-zinc-900">
-            Understanding your vitals
+          <h2 className="text-xl font-semibold text-zinc-950">
+            Educational Library
           </h2>
+          <p className="mt-2 text-sm leading-relaxed text-zinc-600">
+            Educational explainers to help you better understand your results.
+          </p>
+
+          <div className="relative mt-5 aspect-[16/9] w-full overflow-hidden rounded-2xl bg-zinc-900/5">
+            <Image
+              src="/images/mri-card-visual.png"
+              alt="MRI-based educational visual for understanding your vitals"
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 448px) calc(100vw - 2rem), 400px"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 to-transparent" />
+            <div className="absolute bottom-3 left-3 flex flex-wrap items-center gap-2">
+              <span className="rounded-full bg-violet-600 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-sm">
+                Video
+              </span>
+              <span className="rounded-full bg-violet-600 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-sm">
+                6 min
+              </span>
+            </div>
+          </div>
+
+          <h3 className="mt-4 font-serif text-lg font-semibold leading-snug text-zinc-900">
+            Understanding your vitals
+          </h3>
           <p className="mt-2 text-sm leading-relaxed text-zinc-700">
-            MRI adds structural context to the biomarkers in your labs. This
-            section ties imaging findings to the metrics your care team watches
-            over time.
+            Learn how MRI observations and blood biomarkers are interpreted
+            together, what each metric represents, and how to track meaningful
+            changes between follow-up reports.
           </p>
           <Link
             href="/domains"
-            className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#200201] underline decoration-zinc-400 underline-offset-4 transition hover:decoration-zinc-600"
+            className="mt-5 inline-flex w-fit max-w-full items-center justify-center gap-1.5 rounded-full bg-[#514c2410] px-[19px] py-[14px] text-md font-medium text-[#200201] transition hover:bg-[#514c2420] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500"
           >
-            View clinical data sheets
-            <ArrowRight className="h-4 w-4" strokeWidth={2} aria-hidden />
+            Read More
+            <ArrowRight className="h-4 w-4 shrink-0" strokeWidth={2.5} aria-hidden />
           </Link>
-          <div className="relative mt-4 aspect-[16/9] w-full overflow-hidden rounded-xl bg-zinc-800">
-            <Image
-              src="/images/mri-card-visual.png"
-              alt=""
-              fill
-              className="object-cover object-center opacity-90"
-              sizes="(max-width: 448px) 100vw, 400px"
-            />
-          </div>
         </section>
       </div>
     </div>

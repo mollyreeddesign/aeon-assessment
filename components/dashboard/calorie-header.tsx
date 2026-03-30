@@ -52,7 +52,12 @@ export function CalorieHeader({
                 <span className="text-xl font-semibold leading-none">%</span>
               </p>
               <p className="mt-1 max-w-[7rem] text-[12px] font-medium leading-tight text-white/85">
-                Screening Status
+                <span className="min-[401px]:hidden">
+                  Screening
+                  <br />
+                  Status
+                </span>
+                <span className="hidden min-[401px]:inline">Screening Status</span>
               </p>
             </div>
 
@@ -112,8 +117,13 @@ export function CalorieHeader({
                 <span className="tabular-nums">{goalProgressPercent}</span>
                 <span className="text-xl font-semibold leading-none">%</span>
               </p>
-              <p className="mt-1 max-w-[7rem] text-[12px] leading-tight font-medium leading-snug text-white/85">
-                Goal <br /> Progress
+              <p className="mt-1 max-w-[7rem] text-[12px] font-medium leading-tight text-white/85">
+                <span className="min-[401px]:hidden">
+                  Goal
+                  <br />
+                  Progress
+                </span>
+                <span className="hidden min-[401px]:inline">Goal Progress</span>
               </p>
             </div>
           </div>

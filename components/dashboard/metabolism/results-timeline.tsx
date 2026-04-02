@@ -1,9 +1,9 @@
 /** Past year, three samples per series (illustrative). */
 const YEAR_DATA = {
   labels: ["Q1", "Q2", "Q3"] as const,
-  /** Dips at Q2 then rises—wavy path between points. */
-  screening: [80, 68, 76],
-  /** Steady decline across the year. */
+  /** Peaks at Q1/Q3 with a dip in the middle. */
+  screening: [88, 90, 88],
+  /** Overall score trends downward across the year. */
   overall: [82, 74, 66],
 };
 
@@ -56,6 +56,34 @@ function smoothLinePath(points: { x: number; y: number }[]): string {
   return d;
 }
 
+/**
+ * Explicit "U-dip" curve between points using quadratic segments.
+ * With 3 points this yields a down-then-up feel between Q1→Q2 and Q2→Q3.
+ */
+function uDipPath(
+  points: { x: number; y: number }[],
+  dipPx: number,
+): string {
+  if (points.length === 0) return "";
+  if (points.length === 1) return `M ${points[0].x} ${points[0].y}`;
+  if (points.length === 2) {
+    const [p0, p1] = points;
+    const cx = (p0.x + p1.x) / 2;
+    const cy = Math.max(p0.y, p1.y) + dipPx;
+    return `M ${p0.x} ${p0.y} Q ${cx} ${cy} ${p1.x} ${p1.y}`;
+  }
+
+  let d = `M ${points[0].x} ${points[0].y}`;
+  for (let i = 0; i < points.length - 1; i++) {
+    const p0 = points[i];
+    const p1 = points[i + 1];
+    const cx = (p0.x + p1.x) / 2;
+    const cy = Math.max(p0.y, p1.y) + dipPx;
+    d += ` Q ${cx} ${cy} ${p1.x} ${p1.y}`;
+  }
+  return d;
+}
+
 function buildAreaPath(linePath: string, lastX: number, bottomY: number): string {
   const firstMatch = /M\s*([\d.]+)\s*([\d.]+)/.exec(linePath);
   const firstX = firstMatch ? Number(firstMatch[1]) : 0;
@@ -91,7 +119,8 @@ function buildYearChart() {
     y: scaleY(v),
   }));
 
-  const pathS = smoothLinePath(ptsS);
+  const dipPx = chartH * 0.22;
+  const pathS = uDipPath(ptsS, dipPx);
   const pathO = smoothLinePath(ptsO);
   const lastX = padX + (n - 1) * step;
   const areaS = buildAreaPath(pathS, lastX, bottomY);
@@ -147,25 +176,24 @@ export function ResultsTimeline() {
           Your Results
         </h3>
         <p className="mt-1 text-sm text-zinc-500">
-          Screening status and overall score over the past year (illustrative,
-          three points per line).
+          Screening score and metabolsim score over the past year.
         </p>
       </div>
 
       <div className="legend mt-4 flex flex-wrap items-center justify-center gap-6 text-xs">
-        <span className="inline-flex items-center gap-2 text-zinc-700">
+          <span className="inline-flex items-center gap-2 text-zinc-700">
           <span
             className="h-2.5 w-2.5 shrink-0 rounded-full bg-sky-500"
             aria-hidden
           />
-          Screening status
+          Screening score
         </span>
         <span className="inline-flex items-center gap-2 text-zinc-700">
           <span
             className="h-2.5 w-2.5 shrink-0 rounded-full bg-violet-500"
             aria-hidden
           />
-          Overall score
+          Metabolism score
         </span>
       </div>
 
@@ -174,7 +202,7 @@ export function ResultsTimeline() {
           viewBox={`0 0 ${chart.w} ${chart.h}`}
           className="mx-auto block w-full min-w-[280px] max-w-md"
           role="img"
-          aria-label="Screening status and overall score over the past year"
+          aria-label="Screening score and metabolism score over the past year"
         >
           <defs>
             <linearGradient

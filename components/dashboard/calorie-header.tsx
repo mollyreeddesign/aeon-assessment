@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import Link from "next/link";
 import { useHealthGoalsProgress } from "@/components/dashboard/health-goals-progress-context";
 import { AnimatedHealthProgressRing } from "@/components/dashboard/health-progress-ring";
 import { DashboardTopBar } from "@/components/dashboard/dashboard-top-bar";
@@ -55,9 +56,9 @@ export function CalorieHeader({
                 <span className="min-[401px]:hidden">
                   Screening
                   <br />
-                  Status
+                  Score
                 </span>
-                <span className="hidden min-[401px]:inline">Screening Status</span>
+                <span className="hidden min-[401px]:inline">Screening Score</span>
               </p>
             </div>
 
@@ -134,7 +135,7 @@ export function CalorieHeader({
             onClick={() => setShowCalculationModal(true)}
             className="text-xs font-medium text-white/90 underline decoration-white/70 underline-offset-2 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
-            How is this calculated?
+            How are these calculated?
           </button>
         </div>
       </div>
@@ -156,10 +157,10 @@ export function CalorieHeader({
               id="health-score-modal-title"
               className="font-serif text-lg font-semibold"
             >
-              How your Health Score is calculated
+              How your scores are calculated
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-zinc-700">
-              Your score combines biomarker trends and MRI
+              <span className="font-semibold text-zinc-800">Your Health Score</span> combines biomarker trends and MRI
               markers into one weighted result. Recent improvements carry more
               weight than older data, and consistent healthy biomarker trends help raise
               the score over time.
@@ -170,6 +171,16 @@ export function CalorieHeader({
               Goals. When you pin Improve Metabolism, those tasks count toward the
               total as well.
             </p>
+            <p className="mt-3 text-sm leading-relaxed text-zinc-700">
+              <span className="font-semibold text-zinc-800">Screening Score</span>{" "}
+              Indicates how complete and up to date your health checks are. Lower scores may mean you’re due for additional screening.
+            </p>
+            <Link
+              href="/dashboard/screening"
+              className="mt-3 inline-flex w-fit items-center justify-center text-sm font-semibold text-[#200201] underline decoration-zinc-400 underline-offset-4 transition hover:bg-zinc-100 hover:decoration-zinc-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500"
+            >
+              Book a screening
+            </Link>
             <button
               type="button"
               onClick={() => setShowCalculationModal(false)}

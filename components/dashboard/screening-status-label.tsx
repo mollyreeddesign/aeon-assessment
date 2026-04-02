@@ -3,7 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 
 const TOOLTIP_TEXT =
-  "Screening Status indicates how complete and recent your results are. The higher, the better.";
+  "Screening Score indicates how complete and up to date your health checks are. Lower scores may mean you’re due for additional screening.";
 
 export function ScreeningStatusLabel() {
   const [open, setOpen] = useState(false);
@@ -43,7 +43,7 @@ export function ScreeningStatusLabel() {
         aria-controls={tipId}
         onClick={() => setOpen((v) => !v)}
       >
-        Screening Status
+        Screening Score
       </button>
       {open ? (
         <div

@@ -109,7 +109,7 @@ export default function OpenReportPage() {
           </div>
           <div className="mt-4 grid grid-cols-2 gap-3">
             <div className="rounded-xl border border-stone-200/80 bg-white/80 px-3 py-3 text-center shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
-              <p className="text-[10px] font-medium uppercase tracking-wider text-zinc-500">
+              <p className="text-sm font-medium text-zinc-500">
                 Duration
               </p>
               <p className="mt-1 text-lg font-semibold tabular-nums text-[#200201]">
@@ -117,8 +117,8 @@ export default function OpenReportPage() {
               </p>
             </div>
             <div className="rounded-xl border border-stone-200/80 bg-white/80 px-3 py-3 text-center shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
-              <p className="text-[10px] font-medium tracking-wide text-zinc-500">
-                Result Score:
+              <p className="text-sm font-medium text-zinc-500">
+                Result Score
               </p>
               <p className="mt-1 text-lg font-semibold tabular-nums text-[#200201]">
                 62%

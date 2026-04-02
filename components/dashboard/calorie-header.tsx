@@ -28,6 +28,7 @@ export function CalorieHeader({
     100,
     Math.max(0, ringFillPercent ?? healthScore),
   );
+  const isGoalComplete = goalProgressPercent >= 100;
   // Light feedback when the goal checklist is fully complete.
   useEffect(() => {
     const at100 = goalProgressPercent >= 100;
@@ -164,7 +165,7 @@ export function CalorieHeader({
               <div className="relative">
               <p
                 className={`flex items-baseline justify-center gap-0.5 font-sans text-2xl font-semibold tabular-nums leading-none ${
-                  goalCelebration ? "text-emerald-200" : ""
+                  isGoalComplete ? "text-emerald-200" : ""
                 }`}
               >
                 <span className="tabular-nums">{goalProgressPercent}</span>
@@ -178,7 +179,11 @@ export function CalorieHeader({
                 />
               ) : null}
               </div>
-              <p className="mt-1 max-w-[7rem] text-[12px] font-medium leading-tight text-white/85">
+              <p
+                className={`mt-1 max-w-[7rem] text-[12px] leading-tight text-white/85 ${
+                  isGoalComplete ? "font-semibold" : "font-medium"
+                }`}
+              >
                 <span className="min-[401px]:hidden">
                   Goal
                   <br />

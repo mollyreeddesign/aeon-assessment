@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useHealthGoalsProgress } from "@/components/dashboard/health-goals-progress-context";
 import { AnimatedHealthProgressRing } from "@/components/dashboard/health-progress-ring";
@@ -19,12 +19,142 @@ export function CalorieHeader({
 }: CalorieHeaderProps) {
   const { goalProgressPercent } = useHealthGoalsProgress();
   const [showCalculationModal, setShowCalculationModal] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const rafRef = useRef<number | null>(null);
+  const celebrationStartedRef = useRef(false);
+
   const ringPct = Math.min(
     100,
     Math.max(0, ringFillPercent ?? healthScore),
   );
+
+  function startConfetti() {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const resize = () => {
+      const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+      canvas.width = Math.floor(window.innerWidth * dpr);
+      canvas.height = Math.floor(window.innerHeight * dpr);
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+
+    resize();
+
+    const startAt = performance.now();
+    const durationMs = 2600;
+
+    const colors = [
+      "#fda87b",
+      "#34d399",
+      "#a78bfa",
+      "#0284c7",
+      "#f3eeff",
+      "#fde8d4",
+    ];
+
+    const cx = window.innerWidth / 2;
+    const cy = Math.min(window.innerHeight * 0.35, 240);
+
+    const pieceCount = 170;
+    const pieces = new Array(pieceCount).fill(0).map((_, i) => {
+      const angle = (i / pieceCount) * Math.PI * 2;
+      const speed = 4 + Math.random() * 7;
+      const vx = Math.cos(angle) * speed;
+      const vy = Math.sin(angle) * speed - 6 - Math.random() * 3;
+      return {
+        x: cx + (Math.random() - 0.5) * 10,
+        y: cy + (Math.random() - 0.5) * 10,
+        vx,
+        vy,
+        rot: Math.random() * Math.PI * 2,
+        vr: (Math.random() - 0.5) * 0.35,
+        w: 5 + Math.random() * 5,
+        h: 6 + Math.random() * 7,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        life: 1,
+      };
+    });
+
+    const gravity = 0.18;
+    const drag = 0.995;
+
+    const tick = () => {
+      const now = performance.now();
+      const t = (now - startAt) / durationMs;
+      if (t >= 1) {
+        setShowConfetti(false);
+        if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+        return;
+      }
+
+      const alpha = Math.max(0, 1 - t);
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+      for (const p of pieces) {
+        p.vx *= drag;
+        p.vy = p.vy + gravity;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rot += p.vr;
+        p.life = alpha;
+
+        ctx.save();
+        ctx.globalAlpha = p.life;
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.fillStyle = p.color;
+        // small rectangle confetti
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      }
+
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+
+    window.addEventListener("resize", resize);
+    // Cleanup after duration; keeps it simple and avoids stacking listeners.
+    window.setTimeout(() => window.removeEventListener("resize", resize), durationMs);
+  }
+
+  useEffect(() => {
+    if (goalProgressPercent >= 100) {
+      if (!celebrationStartedRef.current) {
+        celebrationStartedRef.current = true;
+        setShowConfetti(true);
+      }
+      return;
+    }
+
+    // If the user drops below 100 again, allow celebration next time.
+    celebrationStartedRef.current = false;
+    setShowConfetti(false);
+  }, [goalProgressPercent]);
+
+  // Start animation only after the canvas has actually mounted.
+  useEffect(() => {
+    if (!showConfetti) return;
+    const id = requestAnimationFrame(() => startConfetti());
+    return () => cancelAnimationFrame(id);
+  }, [showConfetti]);
+
   return (
     <>
+      {showConfetti ? (
+        <canvas
+          ref={canvasRef}
+          className="fixed inset-0 z-[120] pointer-events-none"
+          aria-hidden
+        />
+      ) : null}
       <header className="relative overflow-hidden text-white">
       <DashboardTopBar />
       <div
@@ -176,7 +306,7 @@ export function CalorieHeader({
               Indicates how complete and up to date your health checks are. Lower scores may mean you’re due for additional screening.
             </p>
             <Link
-              href="/dashboard/screening"
+              href="/book"
               className="mt-3 inline-flex w-fit items-center justify-center text-sm font-semibold text-[#200201] underline decoration-zinc-400 underline-offset-4 transition hover:bg-zinc-100 hover:decoration-zinc-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500"
             >
               Book a screening
